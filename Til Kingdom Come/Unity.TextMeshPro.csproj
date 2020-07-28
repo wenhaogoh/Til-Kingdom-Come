@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{bf873b10-283e-6905-afd9-1640024cbd53}</ProjectGuid>
+    <ProjectGuid>{b169a4dd-7fa8-ba8e-47bc-5d1747a08610}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.TextMeshPro</AssemblyName>
@@ -635,10 +635,10 @@
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.0f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

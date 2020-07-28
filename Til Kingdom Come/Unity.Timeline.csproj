@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{a79b9e27-2575-b891-d7ae-aa7f72a217f0}</ProjectGuid>
+    <ProjectGuid>{1463921f-7717-74c8-a7a5-edea1d520968}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Timeline</AssemblyName>
@@ -647,10 +647,10 @@
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.0f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

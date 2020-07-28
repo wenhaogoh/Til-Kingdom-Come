@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{472a0f70-543c-3221-7ea4-2af8623c91ff}</ProjectGuid>
+    <ProjectGuid>{a9ed044d-eaaf-76c2-6118-1d4b95194d81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Timeline.Editor</AssemblyName>
@@ -468,7 +468,7 @@
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.0f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.0f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -816,25 +816,25 @@
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.0f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/netstandard.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til Kingdom Come Revamp/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+        <HintPath>/Users/wenhao/Desktop/Orbital/Repository/Revamp/Til-Kingdom-Come/Til Kingdom Come/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{a79b9e27-2575-b891-d7ae-aa7f72a217f0}</Project>
+      <Project>{1463921f-7717-74c8-a7a5-edea1d520968}</Project>
       <Name>Unity.Timeline</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{6fa15579-a472-17f2-0105-4df7b3e0c20f}</Project>
+      <Project>{877c3e09-bc08-7d6b-dcbf-b03c7a9f74df}</Project>
       <Name>UnityEditor.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{2dc73831-cc22-89d5-8bb0-62129a2f5230}</Project>
+      <Project>{b0161b5b-2209-2d07-8498-9d425e169c61}</Project>
       <Name>UnityEngine.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
