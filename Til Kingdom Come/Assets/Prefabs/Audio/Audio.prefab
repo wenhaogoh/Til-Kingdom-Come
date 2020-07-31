@@ -61,4 +61,10 @@ MonoBehaviour:
     loop: 1
   soundEffectsOutput: {fileID: 9178981272967555445, guid: 8f6b6f86a1bea4e8f95bfc540402383b,
     type: 2}
-  soundEffects: []
+  soundEffects:
+  - name: Button
+    clip: {fileID: 8300000, guid: fb3b4afa0fb29497d9cbfe5bf09f488c, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
