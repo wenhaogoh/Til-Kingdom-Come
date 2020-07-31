@@ -57,12 +57,12 @@ public class AudioController : MonoBehaviour
         audioMixer.SetFloat("Master", linearise(PlayerPrefs.GetFloat("Master", 1)));
         audioMixer.SetFloat("Music", linearise(PlayerPrefs.GetFloat("Music", 1)));
         audioMixer.SetFloat("SoundEffects", linearise(PlayerPrefs.GetFloat("SoundEffects", 1)));
-        PlayMusic("Theme");
+        PlayMusic("Main Theme");
     }
 
     public void PlayMusic(string name)
     {
-
+        FadeOutCurrentMusic();
         Sound s = Array.Find(music, music => music.name == name);
         if (s == null) {
             Debug.LogWarning("Music: " + name + " not found!");
@@ -90,7 +90,7 @@ public class AudioController : MonoBehaviour
             Debug.LogWarning("No current music!");
             return;
         }
-        Debug.Log("No current music!");
+        Debug.Log("Fading out current music!");
         StartCoroutine(AudioFadeOut(currentMusic.source, fadeOutTime));
         currentMusic = null;
     }

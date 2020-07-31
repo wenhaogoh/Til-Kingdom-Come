@@ -5,22 +5,20 @@ using UnityEngine;
 public class MainMenuScenePanelsController : MonoBehaviour
 {
     public GameObject mainMenuPanel, volumePanel, controlsPanel;
-    private Vector3 zeroVector = new Vector3(0, 0, 0);
-    private Vector3 oneVector = new Vector3(1, 1, 1);
     public void LaunchMainMenuPanel()
     {
-        volumePanel.transform.localScale = zeroVector;
-        controlsPanel.transform.localScale = zeroVector;
-        mainMenuPanel.transform.localScale = oneVector;
+        volumePanel.transform.localScale = Vector3.zero;
+        controlsPanel.transform.localScale = Vector3.zero;
+        mainMenuPanel.transform.localScale = Vector3.one;
     }
     public void LaunchVolumePanel()
     {
-        mainMenuPanel.transform.localScale = zeroVector;
-        volumePanel.transform.localScale = oneVector;
+        mainMenuPanel.transform.localScale = Vector3.zero;
+        volumePanel.transform.localScale = Vector3.one;
     }
     public void LaunchControlsPanel()
     {
-        mainMenuPanel.transform.localScale = zeroVector;
-        controlsPanel.transform.localScale = oneVector;
+        mainMenuPanel.transform.localScale = Vector3.zero;
+        controlsPanel.transform.localScale = Vector3.one;
     }
 }

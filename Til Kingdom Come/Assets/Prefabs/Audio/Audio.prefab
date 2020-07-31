@@ -47,8 +47,14 @@ MonoBehaviour:
   musicOutput: {fileID: -5093358386451134535, guid: 8f6b6f86a1bea4e8f95bfc540402383b,
     type: 2}
   music:
-  - name: Theme
+  - name: Main Theme
     clip: {fileID: 8300000, guid: 72bf9ce4fa6d74df08964c6e4264140a, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Selection Theme
+    clip: {fileID: 8300000, guid: 63eef4e3d117f406385021ab2d59573e, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1

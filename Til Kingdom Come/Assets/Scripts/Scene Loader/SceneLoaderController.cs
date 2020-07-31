@@ -23,4 +23,10 @@ public class SceneLoaderController : MonoBehaviour
         Debug.Log("Quit Game");
         Application.Quit();
     }
+
+    // Audio helper functions
+    public void PlayMusic(string name)
+    {
+        AudioController.instance.PlayMusic(name);
+    }
 }
