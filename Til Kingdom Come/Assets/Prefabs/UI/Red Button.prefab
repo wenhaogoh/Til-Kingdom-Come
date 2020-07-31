@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2741977047919847673}
   - component: {fileID: 7277207108045702675}
   - component: {fileID: 3886339563611321818}
+  - component: {fileID: 3610925464784426853}
   m_Layer: 5
   m_Name: Red Button
   m_TagString: Untagged
@@ -118,4 +119,28 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7277207108045702675}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3610925464784426853}
+        m_TargetAssemblyTypeName: ButtonSoundController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3610925464784426853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665240900996565224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbd024846ada4c3baa5585cb6466c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
