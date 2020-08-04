@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+    private float spawnDistance = 10f;
+    private float yOffset = -4f;
     public CinemachineTargetGroup group;
     public CooldownUiController playerOneCooldownUi;
     public CooldownUiController playerTwoCooldownUi;
@@ -16,8 +18,8 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        var playerOne = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        var playerTwo = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        var playerOne = Instantiate(playerPrefab, new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
+        var playerTwo = Instantiate(playerPrefab, new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
         
         // Add players to camera target group
         group.AddMember(playerOne.transform, 1, 0);
