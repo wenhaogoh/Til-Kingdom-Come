@@ -16,7 +16,6 @@ public class FarCloudsController : MonoBehaviour
         if (rectTransform.anchoredPosition.x <= -sizeOfMap) {
             rectTransform.anchoredPosition = new Vector2(sizeOfMap, rectTransform.anchoredPosition.y);
         }
-
         rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
     }
 }

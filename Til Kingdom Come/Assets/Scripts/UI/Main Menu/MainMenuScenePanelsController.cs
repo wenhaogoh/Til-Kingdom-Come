@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MainMenuScenePanelsController : MonoBehaviour
 {
-    public GameObject mainMenuPanel, volumePanel, controlsPanel;
+    public GameObject mainMenuPanel, volumePanel, controlsPanel, creditsPanel;
     public void LaunchMainMenuPanel()
     {
+        creditsPanel.transform.localScale = Vector3.zero;
         volumePanel.transform.localScale = Vector3.zero;
         controlsPanel.transform.localScale = Vector3.zero;
         mainMenuPanel.transform.localScale = Vector3.one;
@@ -20,5 +21,12 @@ public class MainMenuScenePanelsController : MonoBehaviour
     {
         mainMenuPanel.transform.localScale = Vector3.zero;
         controlsPanel.transform.localScale = Vector3.one;
+    }
+    public void LaunchCreditsPanel()
+    {
+        volumePanel.transform.localScale = Vector3.zero;
+        controlsPanel.transform.localScale = Vector3.zero;
+        mainMenuPanel.transform.localScale = Vector3.zero;
+        creditsPanel.transform.localScale = Vector3.one;
     }
 }
