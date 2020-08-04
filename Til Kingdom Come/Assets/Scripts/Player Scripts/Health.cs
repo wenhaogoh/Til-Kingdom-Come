@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Player
+﻿namespace Player_Scripts
 {
     public class Health
     {

@@ -1,4 +1,4 @@
-﻿namespace Player.Interfaces
+﻿namespace Player_Scripts.Interfaces
 {
     public interface IDamageable
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Player
+namespace Player_Scripts
 {
     public class ReskinAnimation : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace Player
 
         private void LateUpdate()
         {
-            var subSprites = Resources.LoadAll<Sprite>("Player Sprites/" + spriteSheetName);
+            var subSprites = Resources.LoadAll<Sprite>("PlayerSprites/" + spriteSheetName);
 
             foreach (var renderer in GetComponentsInChildren<SpriteRenderer>())
             {

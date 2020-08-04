@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Player.Interfaces;
+using Player_Scripts.Interfaces;
 using UnityEngine;
-using UnityEngine.Timeline;
 
-namespace Player
+namespace Player_Scripts
 {
     public class Player : Entity, IDamageable
     {
@@ -16,7 +15,7 @@ namespace Player
 
         private Rigidbody2D rb;
         private SpriteRenderer sprite;
-        private Animator anim;
+        public Animator anim;
 
         #endregion
         
@@ -31,7 +30,7 @@ namespace Player
 
         #region SKILLS
 
-        // public Attack attack;
+        public Skill[] skills = new Skill[4];
 
         #endregion
         
@@ -54,6 +53,7 @@ namespace Player
             if (combatState == CombatState.NonCombat)
             {
                 ListenForMovement();
+                ListenForAttack();
             } 
             else if (combatState == CombatState.Hurt)
             {
@@ -83,6 +83,14 @@ namespace Player
             else
             {
                 anim.SetInteger("state", 0);
+            }
+        }
+
+        private void ListenForAttack()
+        {
+            if (playerInput.AttemptAttack)
+            {
+                skills[0].Cast(this);
             }
         }
 
