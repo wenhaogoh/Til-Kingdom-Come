@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoaderController : MonoBehaviour
 {
     public Animator transition;
-    public float transitionTime = 1f;
+    public float transitionTime = 0.5f;
     public void LoadScene(string sceneName) {
         Debug.Log("Loading Scene: " + sceneName);
         StartCoroutine(Helper(sceneName));

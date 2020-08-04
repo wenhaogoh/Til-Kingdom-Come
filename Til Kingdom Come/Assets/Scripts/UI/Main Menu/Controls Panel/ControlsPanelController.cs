@@ -5,12 +5,18 @@ using TMPro;
 
 public class ControlsPanelController : MonoBehaviour
 {
+    public enum Messages
+    {
+        Select, Choose, Duplicate, Assign
+    }
     private GameObject currentKey;
     private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
     [Header("Player 1")]
     public TextMeshProUGUI p1left, p1right, p1roll, p1attack, p1block, p1skill;
     [Header("Player 2")]
     public TextMeshProUGUI p2left, p2right, p2roll, p2attack, p2block, p2skill;
+    [Header("Messages")]
+    public GameObject[] messages;
     void Start()
     {
         keys.Add("P1Left", (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P1Left", "A")));
@@ -66,6 +72,11 @@ public class ControlsPanelController : MonoBehaviour
                     keys[currentKey.name] = e.keyCode;
                     currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = e.keyCode.ToString();
                     currentKey = null;
+                    EnableMessage((int) Messages.Select);
+                }
+                else
+                {
+                    EnableMessage((int) Messages.Duplicate);
                 }
             }
         }
@@ -76,6 +87,18 @@ public class ControlsPanelController : MonoBehaviour
         {
             currentKey = clicked;
             currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = '"'.ToString();
+            EnableMessage((int) Messages.Choose);
+        }
+        else
+        {
+            if (currentKey == clicked)
+            {
+                EnableMessage((int) Messages.Choose);
+            }
+            else
+            {
+                EnableMessage((int) Messages.Assign);
+            }
         }
     }
     public void SaveKeys()
@@ -86,5 +109,27 @@ public class ControlsPanelController : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+    }
+
+    private void EnableMessage(int index)
+    {
+        int len = messages.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (i == index)
+            {
+                GameObject message = messages[i];
+                message.SetActive(true);
+                ErrorMessageController err = message.GetComponent<ErrorMessageController>();
+                if (err != null)
+                {
+                    err.Begin();
+                }
+            }
+            else
+            {
+                messages[i].SetActive(false);
+            }
+        }
     }
 }
