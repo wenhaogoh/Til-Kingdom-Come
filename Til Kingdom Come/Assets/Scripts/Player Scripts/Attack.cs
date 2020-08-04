@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Player_Scripts
@@ -10,8 +11,12 @@ namespace Player_Scripts
         private int maxCharge = 3;
         private float chargeTime = 4f;
         private int damage = 20;
+        private int finalComboDamage = 40;
         private float reactionDelay = 0.3f;
         private float attackDistance = 4.5f;
+        private float moveDistance = 12f;
+        private Combo combo = new Combo();
+        public Sprite[] sprites = new Sprite[3];
 
         private void Start()
         {
@@ -24,6 +29,8 @@ namespace Player_Scripts
         private void Update()
         {
             Charging();
+            combo.UpdateDecay();
+            icon = sprites[(int) combo.CurrentCombo];
         }
 
         public override void Cast(Player player)
@@ -39,7 +46,19 @@ namespace Player_Scripts
                 nextAvailableTime = Time.time + chargeTime;
             }
             charge.DecreaseCharge();
-            StartCoroutine(ComboOneAnimDelay(player));
+            combo.SetDecay();
+            switch (combo.CurrentCombo)
+            {
+                case (Combo.ComboNumber.One):
+                    StartCoroutine(ComboOneAnimDelay(player));
+                    break;
+                case (Combo.ComboNumber.Two):
+                    StartCoroutine(ComboTwoAnimDelay(player));
+                    break;
+                case (Combo.ComboNumber.Three):
+                    StartCoroutine(ComboThreeAnimDelay(player));
+                    break;
+            }
         }
 
         #region COMBOS
@@ -49,14 +68,42 @@ namespace Player_Scripts
             player.combatState = Player.CombatState.Combat;
             player.anim.SetTrigger("Attack");
             yield return new WaitForSeconds(reactionDelay);
-            DetectHit(player);
+            DetectHit(player, damage);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
+            player.combatState = Player.CombatState.NonCombat;
+        }
+        
+        private IEnumerator ComboTwoAnimDelay(Player player)
+        {
+            player.combatState = Player.CombatState.Combat;
+            player.anim.SetTrigger("Attack 2");
+            var velocity = player.rb.velocity;
+            player.rb.velocity = player.IsFacingLeft()
+                ? new Vector2(-moveDistance, velocity.y)
+                : new Vector2(moveDistance, velocity.y); 
+            yield return new WaitForSeconds(reactionDelay);
+            DetectHit(player, damage);
+            yield return new WaitForSeconds(AnimationTimes.instance.Attack2Anim - reactionDelay);
+            player.combatState = Player.CombatState.NonCombat;
+        }
+        
+        private IEnumerator ComboThreeAnimDelay(Player player)
+        {
+            player.combatState = Player.CombatState.Combat;
+            player.anim.SetTrigger("Attack 3");
+            var velocity = player.rb.velocity;
+            player.rb.velocity = player.IsFacingLeft()
+                ? new Vector2(-moveDistance, velocity.y)
+                : new Vector2(moveDistance, velocity.y); 
+            yield return new WaitForSeconds(reactionDelay);
+            DetectHit(player, finalComboDamage);
+            yield return new WaitForSeconds(AnimationTimes.instance.Attack3Anim - reactionDelay);
             player.combatState = Player.CombatState.NonCombat;
         }
 
         #endregion
 
-        private void DetectHit(Player player)
+        private void DetectHit(Player player, int damage)
         {
             var playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
             var direction = player.IsFacingLeft()
@@ -93,7 +140,7 @@ namespace Player_Scripts
                 }
                 
             }
-            
+            combo.UpdateCombo();
         }
         
         private void Charging()

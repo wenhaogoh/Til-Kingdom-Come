@@ -15,7 +15,7 @@ namespace Player_Scripts
 
         #region UNITY COMPONENTS
 
-        private Rigidbody2D rb;
+        public Rigidbody2D rb;
         private SpriteRenderer sprite;
         public Animator anim;
 
@@ -147,6 +147,19 @@ namespace Player_Scripts
         private IEnumerator Hurt()
         {
             yield return null;
+        }
+
+        public void AddSkill(Skill skill)
+        {
+            int length = skills.Length;
+            for (int i = 0; i < length; i++)
+            {
+                if (skills[i] == null)
+                {
+                    skills[i] = skill;
+                    return;
+                }
+            }
         }
     }
 }

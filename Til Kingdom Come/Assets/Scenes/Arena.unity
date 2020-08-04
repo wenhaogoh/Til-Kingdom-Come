@@ -9804,6 +9804,8 @@ MonoBehaviour:
   playerTwoCooldownUi: {fileID: 790464904}
   playerOneHealthBar: {fileID: 809135074}
   playerTwoHealthBar: {fileID: 1202671471}
+  AttackPrefab: {fileID: 7338759665306753517, guid: c0dffb4fcadb66148bd2738df2931bf9,
+    type: 3}
 --- !u!4 &666178310
 Transform:
   m_ObjectHideFlags: 0

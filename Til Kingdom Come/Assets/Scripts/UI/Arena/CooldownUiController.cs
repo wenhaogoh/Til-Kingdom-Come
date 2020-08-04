@@ -21,7 +21,7 @@ public class CooldownUiController : MonoBehaviour
                 continue;
             }
             cooldowns[i] = player.skills[i];
-            spriteIcons[i].sprite = cooldowns[i].GetIcon();
+            
         }
     }
 
@@ -34,6 +34,8 @@ public class CooldownUiController : MonoBehaviour
             {
                 continue;
             }
+            // Updates sprite icons for combos
+            spriteIcons[i].sprite = cooldowns[i].GetIcon();
             ICooldown cooldown = cooldowns[i];
             float nextAvailableTime = cooldown.GetNextAvailableTime();
             float cooldownDuration = cooldown.GetCooldownDuration();

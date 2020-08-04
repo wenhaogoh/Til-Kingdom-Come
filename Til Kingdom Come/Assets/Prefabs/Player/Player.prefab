@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 4817365986353044758}
   - component: {fileID: 4817365986353044757}
   - component: {fileID: 4817365986353044753}
-  - component: {fileID: -5911707851455554295}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -201,26 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413dc9845ac249e0a499816e3a3632e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   anim: {fileID: 0}
   combatState: 0
   skills:
-  - {fileID: -5911707851455554295}
   - {fileID: 0}
-  - {fileID: -5911707851455554295}
-  - {fileID: -5911707851455554295}
---- !u!114 &-5911707851455554295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817365986353044756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0eb1c386c8ed1d42afef14990ace659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Attack
-  info: 
-  cooldown: 3
-  icon: {fileID: 21300000, guid: eca40ad5b917f3942a8bf223b7f67193, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
