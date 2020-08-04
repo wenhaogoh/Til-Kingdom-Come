@@ -1,23 +1,42 @@
-﻿using UnityEngine;
+﻿using Player_Scripts.Interfaces;
+using UnityEngine;
 
 namespace Player_Scripts
 {
-    public abstract class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour, IHealthBar
     {
-        public int maxHealth;
-        protected Health health;
-        
-        
-        // Start is called before the first frame update
-        private void Start()
+        private int maxHealth;
+        private int currentHealth;
+
+        protected void DecreaseHealth(int amount)
         {
-            health = new Health(maxHealth);
+            currentHealth -= amount;
         }
 
-        // Update is called once per frame
-        private void Update()
+        protected void IncreaseHealth(int amount)
         {
-        
+            currentHealth += amount;
+        }
+
+        protected bool IsDead()
+        {
+            return currentHealth <= 0;
+        }
+
+        protected void SetMaxHealth(int maxHealth)
+        {
+            this.maxHealth = maxHealth;
+        }
+
+        protected void RefillCurrentHealth()
+        {
+            this.currentHealth = maxHealth;
+        }
+
+        public float GetHealthRatio()
+        {
+            return (float) currentHealth / (float) maxHealth;
         }
     }
+    
 }

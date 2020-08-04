@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Player_Scripts
@@ -11,6 +10,10 @@ namespace Player_Scripts
 
         private void Update()
         {
+            if (charge == null)
+            {
+                return;
+            }
             text.text = charge.GetCurrentCharge().ToString();
         }
     }

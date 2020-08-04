@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Player_Scripts
+﻿namespace Player_Scripts
 {
     public class Charge
     {
@@ -25,7 +23,6 @@ namespace Player_Scripts
             if (currentCharge < maxCharge)
             {
                 currentCharge++;
-                Debug.Log("Increasing charge");
             }
         }
 
@@ -45,6 +42,11 @@ namespace Player_Scripts
         public float GetChargeTime()
         {
             return chargeTime;
+        }
+
+        public bool IsChargeEmpty()
+        {
+            return currentCharge <= 0;
         }
     
     }

@@ -201,12 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413dc9845ac249e0a499816e3a3632e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
   anim: {fileID: 0}
   combatState: 0
   skills:
   - {fileID: -5911707851455554295}
-  - {fileID: -5911707851455554295}
+  - {fileID: 0}
   - {fileID: -5911707851455554295}
   - {fileID: -5911707851455554295}
 --- !u!114 &-5911707851455554295

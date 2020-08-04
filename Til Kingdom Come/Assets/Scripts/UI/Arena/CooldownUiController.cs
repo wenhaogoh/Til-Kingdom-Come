@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Player_Scripts;
+﻿using Player_Scripts;
 using Player_Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +16,10 @@ public class CooldownUiController : MonoBehaviour
         // Assign icons for each skill
         for(int i = 0; i < NUMBEROFSKILLS; i++)
         {
+            if (player.skills[i] == null)
+            {
+                continue;
+            }
             cooldowns[i] = player.skills[i];
             spriteIcons[i].sprite = cooldowns[i].GetIcon();
         }
@@ -28,6 +30,10 @@ public class CooldownUiController : MonoBehaviour
     {
         for (int i = 0; i < NUMBEROFSKILLS; i++)
         {
+            if (cooldowns[i] == null)
+            {
+                continue;
+            }
             ICooldown cooldown = cooldowns[i];
             float nextAvailableTime = cooldown.GetNextAvailableTime();
             float cooldownDuration = cooldown.GetCooldownDuration();

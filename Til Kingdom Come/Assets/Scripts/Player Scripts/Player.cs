@@ -11,6 +11,8 @@ namespace Player_Scripts
         private int playerNo;
         public enum CombatState { NonCombat, Blocking, Rolling, Hurt, Combat, Dead}
 
+        private const int MAXHEALTH = 100;
+
         #region UNITY COMPONENTS
 
         private Rigidbody2D rb;
@@ -44,6 +46,8 @@ namespace Player_Scripts
             sprite = GetComponentInChildren<SpriteRenderer>();
             playerInput = gameObject.AddComponent<PlayerInput>();
             playerInput.SetInput(playerNo);
+            SetMaxHealth(MAXHEALTH);
+            RefillCurrentHealth();
         }
 
         private void Update()
@@ -104,22 +108,28 @@ namespace Player_Scripts
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        public bool IsFacingRight()
-        {
-            return Math.Abs(transform.rotation.y - 180f) < Mathf.Epsilon;
-        }
-        
         public bool IsFacingLeft()
         {
-            return Math.Abs(transform.rotation.y) < Mathf.Epsilon;
+            return Math.Abs(transform.rotation.eulerAngles.y - 180f) < Mathf.Epsilon;
+        }
+        
+        public bool IsFacingRight()
+        {
+            return Math.Abs(transform.rotation.eulerAngles.y) < Mathf.Epsilon;
+        }
+
+        public static bool IsOpponentFacingPlayer(Player player, Player opponent)
+        {
+            return (player.transform.position.x < opponent.transform.position.x && opponent.IsFacingRight()) ||
+                   (player.transform.position.x > opponent.transform.position.x && opponent.IsFacingLeft());
         }
 
         public void TakeDamage(int damage)
         {
             if (invulnerable) return;
             
-            health.DecreaseHealth(damage);
-            if (health.IsDead())
+            DecreaseHealth(damage);
+            if (IsDead())
             {
                 Die();
             }
@@ -131,7 +141,7 @@ namespace Player_Scripts
 
         private void Die()
         {
-            
+            anim.SetBool("Death", true);
         }
 
         private IEnumerator Hurt()
