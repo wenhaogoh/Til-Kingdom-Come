@@ -1,6 +1,8 @@
-﻿using Cinemachine;
+﻿using System.Collections.Generic;
+using Cinemachine;
 using Player_Scripts;
 using Player_Scripts.Interfaces;
+using UI.Arena;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -14,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     public HealthBarController playerOneHealthBar;
     public HealthBarController playerTwoHealthBar;
 
-    public GameObject AttackPrefab;
+    public GameObject[] basicSkills = new GameObject[3];
 
 
     // Start is called before the first frame update
@@ -36,10 +38,8 @@ public class PlayerManager : MonoBehaviour
         Player playerTwo = playerTwoGameObject.GetComponent<Player>();
 
         // Adding skills to players
-        var playerOneAttack = Instantiate(AttackPrefab, Vector3.zero, Quaternion.identity);
-        playerOne.AddSkill(playerOneAttack.GetComponent<Skill>());
-        var playerTwoAttack = Instantiate(AttackPrefab, Vector3.zero, Quaternion.identity);
-        playerTwo.AddSkill(playerTwoAttack.GetComponent<Skill>());
+        AddBaseSkills(playerOne);
+        AddBaseSkills(playerTwo);
         
         playerOneCooldownUi.player = playerOne.GetComponent<Player>();
         playerTwoCooldownUi.player = playerTwo.GetComponent<Player>();
@@ -52,7 +52,15 @@ public class PlayerManager : MonoBehaviour
 
         playerOneHealthBar.entity = playerOne.GetComponent<IHealthBar>();
         playerTwoHealthBar.entity = playerTwo.GetComponent<IHealthBar>();
-        
+    }
+
+    private void AddBaseSkills(Player player)
+    {
+        foreach (var basicSkill in basicSkills)
+        {
+            if (basicSkill == null) continue;
+            player.AddSkill(basicSkill);
+        }
     }
 
     private void SetCharge(Player player, ChargeController[] chargeController)

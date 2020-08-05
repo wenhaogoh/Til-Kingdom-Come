@@ -18,7 +18,7 @@ namespace Player_Scripts
         private Combo combo = new Combo();
         public Sprite[] sprites = new Sprite[3];
 
-        private void Start()
+        private void Awake()
         {
             name = "Attack";
             cooldown = chargeTime;

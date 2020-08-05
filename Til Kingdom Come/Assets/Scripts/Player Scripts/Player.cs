@@ -58,10 +58,15 @@ namespace Player_Scripts
             {
                 ListenForMovement();
                 ListenForAttack();
+                ListenForBlock();
+                ListenForRoll();
+                ListenForSkill();
             } 
             else if (combatState == CombatState.Hurt)
             {
                 ListenForMovement();
+                ListenForBlock();
+                ListenForRoll();
             }
 
         }
@@ -98,6 +103,30 @@ namespace Player_Scripts
             }
         }
 
+        private void ListenForBlock()
+        {
+            if (playerInput.AttemptBlock)
+            {
+                skills[1].Cast(this);
+            }
+        }
+
+        private void ListenForRoll()
+        {
+            if (playerInput.AttemptRoll)
+            {
+                skills[2].Cast(this);
+            }
+        }
+
+        private void ListenForSkill()
+        {
+            if (playerInput.AttemptSkill)
+            {
+                skills[3].Cast(this);
+            }
+        }
+
         private void RotateLeft()
         {
             transform.rotation = Quaternion.Euler(0, 180f, 0);
@@ -120,8 +149,8 @@ namespace Player_Scripts
 
         public static bool IsOpponentFacingPlayer(Player player, Player opponent)
         {
-            return (player.transform.position.x < opponent.transform.position.x && opponent.IsFacingRight()) ||
-                   (player.transform.position.x > opponent.transform.position.x && opponent.IsFacingLeft());
+            return (player.transform.position.x < opponent.transform.position.x && opponent.IsFacingLeft()) ||
+                   (player.transform.position.x > opponent.transform.position.x && opponent.IsFacingRight());
         }
 
         public void TakeDamage(int damage)
@@ -149,14 +178,16 @@ namespace Player_Scripts
             yield return null;
         }
 
-        public void AddSkill(Skill skill)
+        public void AddSkill(GameObject skillPrefab)
         {
             int length = skills.Length;
             for (int i = 0; i < length; i++)
             {
                 if (skills[i] == null)
                 {
-                    skills[i] = skill;
+                    var skill = Instantiate(skillPrefab, Vector3.zero, Quaternion.identity);
+                    skill.transform.parent = transform;
+                    skills[i] = skill.GetComponent<Skill>();
                     return;
                 }
             }

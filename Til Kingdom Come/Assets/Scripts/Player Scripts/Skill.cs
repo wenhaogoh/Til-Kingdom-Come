@@ -5,7 +5,6 @@ namespace Player_Scripts
 {
     public abstract class Skill : MonoBehaviour, ICooldown
     {
-        // protected Player player;
         [SerializeField] protected new string name;
         [SerializeField] protected string info;
         [SerializeField] protected float cooldown;

@@ -3,49 +3,50 @@ using Player_Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownUiController : MonoBehaviour
+namespace UI.Arena
 {
-    private const int NUMBEROFSKILLS = 4;
-    public Player player;
-    public ICooldown[] cooldowns = new ICooldown[NUMBEROFSKILLS];
-    public Image[] spriteIcons = new Image[NUMBEROFSKILLS];
-    public Image[] darkMasks = new Image[NUMBEROFSKILLS];
-
-    private void Start()
+    public class CooldownUiController : MonoBehaviour
     {
-        // Assign icons for each skill
-        for(int i = 0; i < NUMBEROFSKILLS; i++)
+        private const int NUMBEROFSKILLS = 4;
+        public Player player;
+        public ICooldown[] cooldowns = new ICooldown[NUMBEROFSKILLS];
+        public Image[] spriteIcons = new Image[NUMBEROFSKILLS];
+        public Image[] darkMasks = new Image[NUMBEROFSKILLS];
+
+        private void Start()
         {
-            if (player.skills[i] == null)
+            // Assign icons for each skill
+            for(int i = 0; i < NUMBEROFSKILLS; i++)
             {
-                continue;
+                if (player.skills[i] == null)
+                {
+                    continue;
+                }
+                cooldowns[i] = player.skills[i];
             }
-            cooldowns[i] = player.skills[i];
-            
         }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        for (int i = 0; i < NUMBEROFSKILLS; i++)
+        // Update is called once per frame
+        private void Update()
         {
-            if (cooldowns[i] == null)
+            for (int i = 0; i < NUMBEROFSKILLS; i++)
             {
-                continue;
-            }
-            // Updates sprite icons for combos
-            spriteIcons[i].sprite = cooldowns[i].GetIcon();
-            ICooldown cooldown = cooldowns[i];
-            float nextAvailableTime = cooldown.GetNextAvailableTime();
-            float cooldownDuration = cooldown.GetCooldownDuration();
-            if (nextAvailableTime < Time.time)
-            {
-                return;
-            }
-            else
-            {
-                darkMasks[i].fillAmount = Mathf.Lerp(0f, 1f, (nextAvailableTime - Time.time) / cooldownDuration);
+                if (cooldowns[i] == null)
+                {
+                    continue;
+                }
+                // Updates sprite icons for combos
+                spriteIcons[i].sprite = cooldowns[i].GetIcon();
+                ICooldown cooldown = cooldowns[i];
+                float nextAvailableTime = cooldown.GetNextAvailableTime();
+                float cooldownDuration = cooldown.GetCooldownDuration();
+                if (nextAvailableTime < Time.time) // Skill is available and ready to use
+                {
+                }
+                else
+                {
+                    darkMasks[i].fillAmount = Mathf.Lerp(0f, 1f, (nextAvailableTime - Time.time) / cooldownDuration);
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7338759665306753517
+--- !u!1 &3150628330786773506
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7338759665306753523}
-  - component: {fileID: 7338759665306753522}
+  - component: {fileID: 3150628330786773508}
+  - component: {fileID: 3150628330786773509}
   m_Layer: 0
-  m_Name: Attack
+  m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7338759665306753523
+--- !u!4 &3150628330786773508
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338759665306753517}
+  m_GameObject: {fileID: 3150628330786773506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,23 +31,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7338759665306753522
+--- !u!114 &3150628330786773509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338759665306753517}
+  m_GameObject: {fileID: 3150628330786773506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0eb1c386c8ed1d42afef14990ace659, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e4bce1a2cd34868b759026f061eb6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Attack
+  name: 
   info: 
-  cooldown: 3
-  icon: {fileID: 21300000, guid: eca40ad5b917f3942a8bf223b7f67193, type: 3}
-  sprites:
-  - {fileID: 21300000, guid: eca40ad5b917f3942a8bf223b7f67193, type: 3}
-  - {fileID: 21300000, guid: 09b3797dda4462545a36aa1e70c0cc8f, type: 3}
-  - {fileID: 21300000, guid: f52a8c30e1a77f647ba9d1434af4e252, type: 3}
+  cooldown: 0
+  icon: {fileID: 21300000, guid: c5d064cc5affc8c44a18f1546e4a1afb, type: 3}
