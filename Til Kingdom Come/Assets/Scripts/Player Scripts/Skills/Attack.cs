@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Diagnostics;
 using UnityEngine;
 
-namespace Player_Scripts
+namespace Player_Scripts.Skills
 {
     public class Attack : Skill, ICharge
     {

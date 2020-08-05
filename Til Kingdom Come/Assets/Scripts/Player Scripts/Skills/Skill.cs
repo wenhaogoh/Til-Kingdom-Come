@@ -1,7 +1,7 @@
 ﻿using Player_Scripts.Interfaces;
 using UnityEngine;
 
-namespace Player_Scripts
+namespace Player_Scripts.Skills
 {
     public abstract class Skill : MonoBehaviour, ICooldown
     {

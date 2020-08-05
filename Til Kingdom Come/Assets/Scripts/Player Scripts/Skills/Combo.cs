@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player_Scripts
+namespace Player_Scripts.Skills
 {
     public class Combo
     {

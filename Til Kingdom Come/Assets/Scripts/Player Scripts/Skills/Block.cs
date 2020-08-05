@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace Player_Scripts
+namespace Player_Scripts.Skills
 {
     public class Block : Skill, ICharge
     {
