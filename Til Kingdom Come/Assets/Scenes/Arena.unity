@@ -7741,7 +7741,7 @@ MonoBehaviour:
   - {fileID: 799847775133680908, guid: 66a397355de72aa4ab671b789f226064, type: 3}
   selectSkills:
   - {fileID: 8260321229362200640, guid: 37d643d54b8281143bc2e90f2c38307e, type: 3}
-  - {fileID: 0}
+  - {fileID: 4300185426545798468, guid: 3142131caf08e8c42bf20f18aabb09b4, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -8656,7 +8656,7 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15174,7 +15174,7 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

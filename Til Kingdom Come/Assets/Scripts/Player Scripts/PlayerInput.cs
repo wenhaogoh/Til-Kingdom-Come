@@ -25,15 +25,6 @@ namespace Player_Scripts
         public bool AttemptBlock => attemptBlock;
         public bool AttemptSkill => attemptSkill;
 
-        private void Awake()
-        {
-
-        }
-
-        private void Start()
-        {
-        }
-        
         private void Update()
         {
             InputManager();
@@ -69,6 +60,13 @@ namespace Player_Scripts
             attemptAttack = Input.GetKeyDown(attackKey);
             attemptBlock = Input.GetKeyDown(blockKey);
             attemptSkill = Input.GetKeyDown(skillKey);
+        }
+
+        public void InvertKeys()
+        {
+            var tempLeftKey = leftKey;
+            leftKey = rightKey;
+            rightKey = tempLeftKey;
         }
     }
 }

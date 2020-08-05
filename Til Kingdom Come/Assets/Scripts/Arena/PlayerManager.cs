@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
         AddBaseSkills(playerOne);
         AddBaseSkills(playerTwo);
         playerOne.AddSkill(selectSkills[0]);
-        playerTwo.AddSkill(selectSkills[0]);
+        playerTwo.AddSkill(selectSkills[1]);
         
         playerOneCooldownUi.player = playerOne.GetComponent<Player>();
         playerTwoCooldownUi.player = playerTwo.GetComponent<Player>();

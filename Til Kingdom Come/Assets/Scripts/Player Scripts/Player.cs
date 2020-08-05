@@ -25,7 +25,7 @@ namespace Player_Scripts
         #region PLAYER VARIABLES
 
         private float moveSpeed = 4f;
-        private PlayerInput playerInput;
+        public PlayerInput playerInput;
         private bool invulnerable = false;
         public CombatState combatState = CombatState.NonCombat;
 
@@ -71,6 +71,8 @@ namespace Player_Scripts
             }
 
         }
+
+        #region LISTENERS
 
         private void ListenForMovement()
         {
@@ -128,6 +130,8 @@ namespace Player_Scripts
             }
         }
 
+        #endregion
+        
         private void RotateLeft()
         {
             transform.rotation = Quaternion.Euler(0, 180f, 0);
@@ -137,6 +141,8 @@ namespace Player_Scripts
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+
+        #region DIRECTION CHECKS
 
         public bool IsFacingLeft()
         {
@@ -150,9 +156,21 @@ namespace Player_Scripts
 
         public static bool IsOpponentFacingPlayer(Player player, Player opponent)
         {
-            return (player.transform.position.x < opponent.transform.position.x && opponent.IsFacingLeft()) ||
-                   (player.transform.position.x > opponent.transform.position.x && opponent.IsFacingRight());
+            var playerPosition = player.transform.position.x;
+            var opponentPosition = opponent.transform.position.x;
+            return (playerPosition < opponentPosition && opponent.IsFacingLeft()) ||
+                   (playerPosition > opponentPosition && opponent.IsFacingRight());
         }
+
+        public static bool IsPlayerFacingOpponent(Player player, Player opponent)
+        {
+            var playerPosition = player.transform.position.x;
+            var opponentPosition = opponent.transform.position.x;
+            return (opponentPosition > playerPosition && player.IsFacingRight()) ||
+                   (opponentPosition < playerPosition && player.IsFacingLeft());
+        }
+
+        #endregion
 
         public void TakeDamage(int damage)
         {
