@@ -7742,7 +7742,7 @@ MonoBehaviour:
   selectSkills:
   - {fileID: 8260321229362200640, guid: 37d643d54b8281143bc2e90f2c38307e, type: 3}
   - {fileID: 4300185426545798468, guid: 3142131caf08e8c42bf20f18aabb09b4, type: 3}
-  - {fileID: 0}
+  - {fileID: 1517089264562413757, guid: 4a4d14575fbbefe4ab0925181dde2109, type: 3}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &666178310
@@ -7938,7 +7938,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

@@ -62,8 +62,9 @@ namespace Player_Scripts
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        public void InvertKeys()
+        public void InvertMovementKeys()
         {
+            // Swaps left and right keycode
             var tempLeftKey = leftKey;
             leftKey = rightKey;
             rightKey = tempLeftKey;

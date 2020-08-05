@@ -13,7 +13,7 @@ namespace Player_Scripts
             currentHealth -= amount;
         }
 
-        protected void IncreaseHealth(int amount)
+        public void IncreaseHealth(int amount)
         {
             currentHealth += amount;
         }
@@ -36,6 +36,11 @@ namespace Player_Scripts
         public float GetHealthRatio()
         {
             return (float) currentHealth / (float) maxHealth;
+        }
+
+        public float GetHealth()
+        {
+            return currentHealth;
         }
     }
     

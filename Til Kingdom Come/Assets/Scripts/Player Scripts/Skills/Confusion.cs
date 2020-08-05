@@ -12,11 +12,8 @@ namespace Player_Scripts.Skills
         private float yOffset = 2f;
         private LayerMask playerLayerMask;
         
-        private void Start()
+        private void Awake()
         {
-            name = "Confusion";
-            info = "Confuse the enemy, inverting their controls";
-            cooldown = 8f;
             playerLayerMask = 1 << 8;
         }
 
@@ -42,15 +39,14 @@ namespace Player_Scripts.Skills
                 var target = ray.collider.GetComponent<Player>();
                 if (target == player) continue;
                 StartCoroutine(Confuse(target));
-
             }
         }
 
         private IEnumerator Confuse(Player player)
         {
-            player.playerInput.InvertKeys();
+            player.playerInput.InvertMovementKeys();
             yield return new WaitForSeconds(confusionDuration);
-            player.playerInput.InvertKeys();
+            player.playerInput.InvertMovementKeys();
             yield return null;
         }
         

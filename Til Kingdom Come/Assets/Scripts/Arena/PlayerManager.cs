@@ -41,8 +41,8 @@ public class PlayerManager : MonoBehaviour
         // Adding skills to players
         AddBaseSkills(playerOne);
         AddBaseSkills(playerTwo);
-        playerOne.AddSkill(selectSkills[0]);
-        playerTwo.AddSkill(selectSkills[1]);
+        playerOne.AddSkill(selectSkills[2]);
+        playerTwo.AddSkill(selectSkills[2]);
         
         playerOneCooldownUi.player = playerOne.GetComponent<Player>();
         playerTwoCooldownUi.player = playerTwo.GetComponent<Player>();
