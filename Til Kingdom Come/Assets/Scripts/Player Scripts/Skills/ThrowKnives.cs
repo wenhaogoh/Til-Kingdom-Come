@@ -17,10 +17,7 @@ namespace Player_Scripts.Skills
         
         private void Awake()
         {
-            name = "Throw Knives";
-            info = "Throw a dagger dealing 20 damage";
             charge = new Charge(maxCharge, chargeTime);
-            cooldown = chargeTime;
         }
 
         private void Update()

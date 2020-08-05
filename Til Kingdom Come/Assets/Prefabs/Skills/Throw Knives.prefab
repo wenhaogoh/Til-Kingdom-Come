@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3aee44f6bcf4b64ab5bfb8b93450313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  info: 
-  cooldown: 0
+  name: Throw Knives
+  info: Throws a dagger that deals 20 damage. Holds a maximum of 3 charges.
+  cooldown: 4
   icon: {fileID: 21300000, guid: bbd5a2085c114314689fcd56d85d5ec1, type: 3}
   knife: {fileID: 2339052871081932433, guid: d7bcd8d315d79b042b61b64fc6f60221, type: 3}

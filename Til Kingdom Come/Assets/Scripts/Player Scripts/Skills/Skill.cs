@@ -8,10 +8,8 @@ namespace Player_Scripts.Skills
         [SerializeField] protected new string name;
         [SerializeField] protected string info;
         [SerializeField] protected float cooldown;
+        [SerializeField] protected Sprite icon;
         protected float nextAvailableTime;
-
-        public Sprite icon;
-
         public float GetNextAvailableTime()
         {   
             return nextAvailableTime;
@@ -37,6 +35,18 @@ namespace Player_Scripts.Skills
             return cooldown;
         }
 
+        public string GetName()
+        {
+            return name;
+        }
+        public string GetInfo()
+        {
+            return info;
+        }
+        public float GetCooldown()
+        {
+            return cooldown;
+        }
         public Sprite GetIcon()
         {
             return icon;
