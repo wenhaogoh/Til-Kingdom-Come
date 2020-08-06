@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     public HealthBarController playerTwoHealthBar;
 
     public GameObject[] basicSkills = new GameObject[3];
-    public GameObject[] selectedSkills = new GameObject[5];
+    public List<GameObject> selectedSkills;
 
 
     // Start is called before the first frame update
@@ -41,8 +41,8 @@ public class PlayerManager : MonoBehaviour
         // Adding skills to players
         AddBasicSkills(playerOne);
         AddBasicSkills(playerTwo);
-        playerOne.AddSkill(selectedSkills[0]);
-        playerTwo.AddSkill(selectedSkills[0]);
+        playerOne.AddSkill(selectedSkills[SkillSelectionController.GetPlayerOneSkill()]);
+        playerTwo.AddSkill(selectedSkills[SkillSelectionController.GetPlayerTwoSkill()]);
         
         playerOneCooldownUi.player = playerOne.GetComponent<Player>();
         playerTwoCooldownUi.player = playerTwo.GetComponent<Player>();

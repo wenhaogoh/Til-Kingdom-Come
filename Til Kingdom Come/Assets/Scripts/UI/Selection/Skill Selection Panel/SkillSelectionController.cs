@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 public class SkillSelectionController : MonoBehaviour
 {
-    public static int playerOneSkill;
-    public static int playerTwoSkill;
+    private static int playerOneSkill;
+    private static int playerTwoSkill;
     public SkillListController skillList;
     private List<GameObject> skillCells;
     private int skillCellsCount;
@@ -119,5 +119,15 @@ public class SkillSelectionController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public static int GetPlayerOneSkill()
+    {
+        return playerOneSkill;
+    }
+
+    public static int GetPlayerTwoSkill()
+    {
+        return playerTwoSkill;
     }
 }

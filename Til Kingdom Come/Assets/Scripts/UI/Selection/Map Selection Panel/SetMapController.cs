@@ -6,30 +6,32 @@ public class SetMapController : MonoBehaviour
 {
     public Image image;
     public List<Sprite> sprites = new List<Sprite>();
-    public static int selectedMap = 1;
+    private static int selectedMap = 0;
     void Start()
     {
-        int index = selectedMap - 1;
-        image.sprite = sprites[index];
+        image.sprite = sprites[selectedMap];
     }
     public void NextMap()
     {
         selectedMap++;
-        if (selectedMap > sprites.Count)
+        if (selectedMap >= sprites.Count)
         {
-            selectedMap = 1;
+            selectedMap = 0;
         }
-        int index = selectedMap - 1;
-        image.sprite = sprites[index];
+        image.sprite = sprites[selectedMap];
     }
     public void PreviousMap()
     {
         selectedMap--;
-        if (selectedMap < 1)
+        if (selectedMap < 0)
         {
-            selectedMap = sprites.Count;
+            selectedMap = sprites.Count - 1;
         }
-        int index = selectedMap - 1;
-        image.sprite = sprites[index];
+        image.sprite = sprites[selectedMap];
+    }
+
+    public static int GetMap()
+    {
+        return selectedMap;
     }
 }

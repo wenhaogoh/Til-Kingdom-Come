@@ -4,7 +4,7 @@ using TMPro;
 public class SetWinsController : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    public static int wins = 1;
+    private static int wins = 1;
     private int maxWins = 10;
     void Start()
     {
@@ -25,5 +25,10 @@ public class SetWinsController : MonoBehaviour
             wins--;
             text.text = wins.ToString();
         }
+    }
+
+    public static int GetWins()
+    {
+        return wins;
     }
 }
