@@ -18,18 +18,16 @@ namespace Player_Scripts.Skills
         // After Image fields
         public GameObject afterImagePrefab;
         public Queue<GameObject> afterImagePool = new Queue<GameObject>();
-        private float distanceBetweenImages = 2f;
+        private float distanceBetweenImages = 1.5f;
         private float lastImageXpos;
         private bool isLunging;
+        private int poolSize = 5;
+        private float fadeDelay = 2.5f;
 
         private void Awake()
         {
             playerLayerMask = 1 << 8;
             GrowPool();
-        }
-
-        private void Update()
-        {
         }
 
         public override void Cast(Player player)
@@ -64,7 +62,7 @@ namespace Player_Scripts.Skills
 
         private void GrowPool()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < poolSize; i++)
             {
                 var afterImage = Instantiate(afterImagePrefab);
                 AddToPool(afterImage);
@@ -97,13 +95,22 @@ namespace Player_Scripts.Skills
             {
                 if (Mathf.Abs(player.transform.position.x - lastImageXpos) > distanceBetweenImages)
                 {
-                    var afterImage = GetFromPool().GetComponent<PlayerAfterImageSprite>();
+                    var afterImageGameObject = GetFromPool();
+                    var afterImage = afterImageGameObject.GetComponent<PlayerAfterImageSprite>();
                     afterImage.InitializeValues(player.spriteRenderer.sprite, player.transform);
                     lastImageXpos = player.transform.position.x;
+                    StartCoroutine(AfterImageFadeDelay(afterImageGameObject));
                 }
                 time += 0.01f;
                 yield return new WaitForSeconds(0.01f);
             }
+            yield return null;
+        }
+
+        private IEnumerator AfterImageFadeDelay(GameObject afterImage)
+        {
+            yield return new WaitForSeconds(fadeDelay);
+            AddToPool(afterImage);
             yield return null;
         }
 
