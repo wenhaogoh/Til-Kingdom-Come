@@ -115,9 +115,9 @@ namespace Player_Scripts.Skills
                 : new Vector2(xOffset, yOffset);
             // Debug.DrawRay(playerPosition + tempOffset, direction * attackDistance, Color.red, 3);
             RaycastHit2D[] rayCasts = Physics2D.RaycastAll(playerPosition + tempOffset, direction, attackDistance, playerLayerMask);
-            foreach (var ray in rayCasts)
+            foreach (var hit2D in rayCasts)
             {
-                Player target = ray.collider.GetComponent<Player>();
+                Player target = hit2D.collider.GetComponent<Player>();
                 if (target == player) continue;
                 if (target.combatState == Player.CombatState.Blocking &&
                     Player.IsOpponentFacingPlayer(player, target))

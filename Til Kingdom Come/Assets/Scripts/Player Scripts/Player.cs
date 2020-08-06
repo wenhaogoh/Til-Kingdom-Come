@@ -17,7 +17,7 @@ namespace Player_Scripts
         #region UNITY COMPONENTS
 
         public Rigidbody2D rb;
-        private SpriteRenderer sprite;
+        public SpriteRenderer spriteRenderer;
         public Animator anim;
 
         #endregion
@@ -44,7 +44,7 @@ namespace Player_Scripts
 
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponentInChildren<Animator>();
-            sprite = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             playerInput = gameObject.AddComponent<PlayerInput>();
             playerInput.SetInput(playerNo);
             SetMaxHealth(MAXHEALTH);

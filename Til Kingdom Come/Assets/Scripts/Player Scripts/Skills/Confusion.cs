@@ -31,12 +31,12 @@ namespace Player_Scripts.Skills
                 ? new Vector2(-1, 0)
                 : new Vector2(1, 0);
             var rayOffset = player.transform.position + new Vector3(0, yOffset);
-            Debug.DrawRay(rayOffset, direction * 100, Color.cyan, 3);
+            // Debug.DrawRay(rayOffset, direction * 100, Color.cyan, 3);
             RaycastHit2D[] rayCasts =
                 Physics2D.RaycastAll(rayOffset, direction, Single.MaxValue, playerLayerMask);
-            foreach (var ray in rayCasts)
+            foreach (var hit2D in rayCasts)
             {
-                var target = ray.collider.GetComponent<Player>();
+                var target = hit2D.collider.GetComponent<Player>();
                 if (target == player) continue;
                 StartCoroutine(Confuse(target));
             }
