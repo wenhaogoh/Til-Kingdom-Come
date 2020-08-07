@@ -34,8 +34,8 @@ namespace Player_Scripts
         #region PARTICLE EFFECTS
 
         public GameObject bloodSplatter;
+        private float bloodSplatterYOffset = 1.5f;
         public GameObject sparks;
-        private float sparksXOffset;
         private float sparksYOffset = 1.5f;
 
         #endregion
@@ -199,6 +199,7 @@ namespace Player_Scripts
         private void Die()
         {
             anim.SetBool("Death", true);
+            Instantiate(bloodSplatter, transform.position + new Vector3(0, bloodSplatterYOffset), transform.rotation);
         }
 
         private IEnumerator Hurt()

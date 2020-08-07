@@ -205,7 +205,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   playerInput: {fileID: 0}
   combatState: 0
-  bloodSplatter: {fileID: 0}
+  bloodSplatter: {fileID: 291438960380146473, guid: 29a8723467d5ab940970b3762af580b0,
+    type: 3}
   sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
   skills:
   - {fileID: 0}
