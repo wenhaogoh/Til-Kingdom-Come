@@ -47,6 +47,7 @@ MonoBehaviour:
   info: Throws a fireball burning the ground where the fireball lands
   cooldown: 10
   icon: {fileID: 21300000, guid: 3e90a3222d224f84f8b0f102a6f417de, type: 3}
-  fireBallParticle: {fileID: 0}
-  groundFire: {fileID: 3652671176266633909, guid: cb61d871e4aef8245a7d9735691e2942,
+  fireBallParticle: {fileID: 8396698188765111935, guid: 7452cacffe3011c4eb964e889db30bad,
+    type: 3}
+  groundFire: {fileID: 6171742233615747019, guid: 9a0071546a38f7d4eb1a79dd11de3231,
     type: 3}
