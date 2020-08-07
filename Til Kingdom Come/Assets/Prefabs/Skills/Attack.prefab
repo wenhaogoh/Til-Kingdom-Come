@@ -51,3 +51,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eca40ad5b917f3942a8bf223b7f67193, type: 3}
   - {fileID: 21300000, guid: 09b3797dda4462545a36aa1e70c0cc8f, type: 3}
   - {fileID: 21300000, guid: f52a8c30e1a77f647ba9d1434af4e252, type: 3}
+  finalComboParticle: {fileID: 1469282148606194943, guid: 9b0e0c01b9ded3047829f41048fbea8c,
+    type: 3}

@@ -4,6 +4,8 @@ namespace Player_Scripts.Skills
 {
     public class KnifeProjectile : MonoBehaviour
     {
+        public GameObject sparks;
+        
         private int damage = 20;
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -11,7 +13,7 @@ namespace Player_Scripts.Skills
             if (collision.CompareTag("Wall")) DestroyProjectile();
             if (collision.CompareTag("Projectile"))
             {
-                //Instantiate(sparks, transform.position, Quaternion.identity);
+                Instantiate(sparks, transform.position, Quaternion.identity);
                 DestroyProjectile();
             }
             
@@ -27,7 +29,7 @@ namespace Player_Scripts.Skills
                 // Player will not be damaged while blocking (projectile is destroyed)
                 case Player.CombatState.Blocking:
                     DestroyProjectile();
-                    // sparks
+                    Instantiate(sparks, transform.position, Quaternion.identity);
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);

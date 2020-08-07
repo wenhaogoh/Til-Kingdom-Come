@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 
 namespace Player_Scripts.Skills
 {
     public class Confusion : Skill
     {
+        public GameObject confusionParticles;
+        private float confustionParticleYOffset = 3f;
+        
         private float confusionDuration = 4f;
         private float pushDistance = 6f;
-        private float yOffset = 2f;
+        private float rayCastYOffset = 2f;
         private LayerMask playerLayerMask;
         
         private void Awake()
@@ -30,7 +32,7 @@ namespace Player_Scripts.Skills
             var direction = player.IsFacingLeft()
                 ? new Vector2(-1, 0)
                 : new Vector2(1, 0);
-            var rayOffset = player.transform.position + new Vector3(0, yOffset);
+            var rayOffset = player.transform.position + new Vector3(0, rayCastYOffset);
             // Debug.DrawRay(rayOffset, direction * 100, Color.cyan, 3);
             RaycastHit2D[] rayCasts =
                 Physics2D.RaycastAll(rayOffset, direction, Single.MaxValue, playerLayerMask);
@@ -45,6 +47,10 @@ namespace Player_Scripts.Skills
         private IEnumerator Confuse(Player player)
         {
             player.playerInput.InvertMovementKeys();
+            
+            var confusionParticlesGameObject = Instantiate(confusionParticles, player.transform.position + new Vector3(0, confustionParticleYOffset),
+                player.transform.rotation);
+            confusionParticlesGameObject.transform.parent = player.transform;
             yield return new WaitForSeconds(confusionDuration);
             player.playerInput.InvertMovementKeys();
             yield return null;

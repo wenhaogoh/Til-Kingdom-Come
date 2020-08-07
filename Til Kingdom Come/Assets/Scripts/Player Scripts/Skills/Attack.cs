@@ -17,6 +17,9 @@ namespace Player_Scripts.Skills
         private Combo combo = new Combo();
         public Sprite[] sprites = new Sprite[3];
 
+        public GameObject finalComboParticle;
+        private float finalComboParticleXOffset = 4f;
+
         private void Awake()
         {
             name = "Attack";
@@ -97,6 +100,13 @@ namespace Player_Scripts.Skills
             yield return new WaitForSeconds(reactionDelay);
             DetectHit(player, finalComboDamage);
             yield return new WaitForSeconds(AnimationTimes.instance.Attack3Anim - reactionDelay);
+
+            // Final combo particles
+            var finalComboParticleOffset = player.IsFacingLeft()
+                ? new Vector3(-finalComboParticleXOffset, 0)
+                : new Vector3(finalComboParticleXOffset, 0); 
+            Instantiate(finalComboParticle, player.transform.position + finalComboParticleOffset,
+                Quaternion.identity);
             player.combatState = Player.CombatState.NonCombat;
         }
 
@@ -123,6 +133,7 @@ namespace Player_Scripts.Skills
                     Player.IsOpponentFacingPlayer(player, target))
                 {
                     // successful block
+                    target.SuccessfulBlock();
                 }
                 else if (target.combatState == Player.CombatState.Rolling)
                 {

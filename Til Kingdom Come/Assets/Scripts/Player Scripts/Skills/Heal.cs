@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Player_Scripts.Skills
 {
     public class Heal : Skill
     {
+        public GameObject healthParticles;
+        private float healthParticleYOffset = 4f;
+        public GameObject greenGlowParticles;
+        private float greenGlowParticleYOffset = 0.5f;
+        
         private int healAmount = 40;
         private float healDuration = 8f;
         private float tickRate = 0.2f;
@@ -24,7 +28,15 @@ namespace Player_Scripts.Skills
         {
             player.combatState = Player.CombatState.Combat;
             player.anim.SetTrigger(name);
-            yield return new WaitForSeconds(AnimationTimes.instance.ConfusionAnim);
+
+            var healthParticleGameObject = Instantiate(healthParticles, player.transform.position + new Vector3(0, healthParticleYOffset),
+                Quaternion.identity);
+            var greenGlowParticleGameObject = Instantiate(greenGlowParticles, player.transform.position + new Vector3(0, greenGlowParticleYOffset),
+                Quaternion.identity);
+            healthParticleGameObject.transform.parent = player.transform;
+            greenGlowParticleGameObject.transform.parent = player.transform;
+
+            yield return new WaitForSeconds(AnimationTimes.instance.HealAnim);
             player.combatState = Player.CombatState.NonCombat;
             yield return null;
         }

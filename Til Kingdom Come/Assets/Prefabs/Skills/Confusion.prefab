@@ -47,3 +47,5 @@ MonoBehaviour:
   info: Confuse the enemy, inverting their controls
   cooldown: 8
   icon: {fileID: 21300000, guid: fe32fd474bbbfb3439ea795fb578bc14, type: 3}
+  confusionParticles: {fileID: 1704648336535028223, guid: e05233b0213d8a948ad03b56684b2702,
+    type: 3}

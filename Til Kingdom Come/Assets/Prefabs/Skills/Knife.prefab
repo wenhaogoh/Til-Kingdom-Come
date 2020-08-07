@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036f5470ca154ea28534a1b6e967bc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
 --- !u!50 &2339052871081932460
 Rigidbody2D:
   serializedVersion: 4
@@ -130,8 +131,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 39477029
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e25dbd250f50c5949bd0261684a04ae8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

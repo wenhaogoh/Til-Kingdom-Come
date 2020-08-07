@@ -31,6 +31,15 @@ namespace Player_Scripts
 
         #endregion
 
+        #region PARTICLE EFFECTS
+
+        public GameObject bloodSplatter;
+        public GameObject sparks;
+        private float sparksXOffset;
+        private float sparksYOffset = 1.5f;
+
+        #endregion
+
         #region SKILLS
 
         public Skill[] skills = new Skill[4];
@@ -210,6 +219,11 @@ namespace Player_Scripts
                     return;
                 }
             }
+        }
+
+        public void SuccessfulBlock()
+        {
+            Instantiate(sparks, transform.position + new Vector3(0, sparksYOffset), transform.rotation);
         }
     }
 }

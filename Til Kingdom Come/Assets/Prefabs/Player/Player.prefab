@@ -201,8 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   anim: {fileID: 0}
+  playerInput: {fileID: 0}
   combatState: 0
+  bloodSplatter: {fileID: 0}
+  sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
   skills:
   - {fileID: 0}
   - {fileID: 0}

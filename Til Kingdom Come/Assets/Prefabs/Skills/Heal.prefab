@@ -47,3 +47,7 @@ MonoBehaviour:
   info: Heals 40 hp over 8s
   cooldown: 12
   icon: {fileID: 21300000, guid: d6b386439fa75ae46941be90e3159469, type: 3}
+  healthParticles: {fileID: 5111142782585077209, guid: c26b9d37c0fccfb4b956dda0eea821b5,
+    type: 3}
+  greenGlowParticles: {fileID: 1471350893045230102, guid: e3d7bf619f986264798bf245b4947b8d,
+    type: 3}

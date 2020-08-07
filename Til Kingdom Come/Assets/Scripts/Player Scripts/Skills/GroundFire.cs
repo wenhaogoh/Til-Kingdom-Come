@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player_Scripts.Skills
 {
@@ -29,10 +28,10 @@ namespace Player_Scripts.Skills
                 boxCollider2D.enabled = false;
             }
 
-            if (particleSystem.particleCount == 0)
+            /*if (particleSystem.particleCount == 0)
             {
                 Destroy(gameObject);
-            }
+            }*/
         }
 
         private void OnTriggerStay2D(Collider2D other)

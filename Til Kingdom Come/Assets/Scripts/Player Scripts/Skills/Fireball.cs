@@ -53,9 +53,9 @@ namespace Player_Scripts.Skills
         private void SpawnGroundFire(Player player)
         {
             var groundFireOffset = player.IsFacingLeft()
-                ? new Vector3(groundFireXOffset, 0, 0)
-                : new Vector3(-groundFireXOffset, 0, 0);
-            var groundFireGameObject = Instantiate(groundFire, player.transform.position, player.transform.rotation);
+                ? new Vector3(-groundFireXOffset, 0, 0)
+                : new Vector3(groundFireXOffset, 0, 0);
+            var groundFireGameObject = Instantiate(groundFire, player.transform.position + groundFireOffset, player.transform.rotation);
         }
     }
 }
