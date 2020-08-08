@@ -5,6 +5,9 @@ namespace Player_Scripts
 {
     public class PlayerInput : MonoBehaviour
     {
+        public static Action onEnableInput;
+        public static Action onDisableInput;
+        private bool inputIsEnabled;
         private KeyCode leftKey;
         private KeyCode rightKey;
         private KeyCode rollKey;
@@ -17,17 +20,24 @@ namespace Player_Scripts
         private bool attemptAttack;
         private bool attemptBlock;
         private bool attemptSkill;
-
         public bool AttemptLeft => attemptLeft;
         public bool AttemptRight => attemptRight;
         public bool AttemptRoll => attemptRoll;
         public bool AttemptAttack => attemptAttack;
         public bool AttemptBlock => attemptBlock;
         public bool AttemptSkill => attemptSkill;
-
+        private void Awake()
+        {
+            inputIsEnabled = false;
+            onEnableInput += EnableInput;
+            onDisableInput += DisableInput;
+        }
         private void Update()
         {
-            InputManager();
+            if (inputIsEnabled)
+            {
+                InputManager();
+            }
         }
 
         public void SetInput(int playerNo)
@@ -60,6 +70,22 @@ namespace Player_Scripts
             attemptAttack = Input.GetKeyDown(attackKey);
             attemptBlock = Input.GetKeyDown(blockKey);
             attemptSkill = Input.GetKeyDown(skillKey);
+        }
+
+        private void EnableInput()
+        {
+            inputIsEnabled = true;
+        }
+
+        private void DisableInput()
+        {
+            attemptLeft = false;
+            attemptRight = false;
+            attemptRoll = false;
+            attemptAttack = false;
+            attemptBlock = false;
+            attemptSkill = false;
+            inputIsEnabled = false;
         }
 
         public void InvertMovementKeys()

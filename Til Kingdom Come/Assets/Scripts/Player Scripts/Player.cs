@@ -198,8 +198,10 @@ namespace Player_Scripts
 
         private void Die()
         {
+            PlayerInput.onDisableInput.Invoke();
             anim.SetBool("Death", true);
             Instantiate(bloodSplatter, transform.position + new Vector3(0, bloodSplatterYOffset), transform.rotation);
+            GameManager.onPlayerDeath.Invoke(playerNo);
         }
 
         private IEnumerator Hurt()

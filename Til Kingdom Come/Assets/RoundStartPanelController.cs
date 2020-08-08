@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Player_Scripts;
 
 public class RoundStartPanelController : MonoBehaviour
 {
     private RectTransform rectTransform;
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI roundNumber;
     private float speed = 800f;
     private float freezeDuration = 1f;
     private Vector3 hiddenPosition;
     private Vector3 targetPosition = Vector3.zero;
-    public bool lower;
+    private bool lower;
     private bool raise;
     void Awake()
     {
@@ -22,9 +23,9 @@ public class RoundStartPanelController : MonoBehaviour
     }
     void Update()
     {
-        float step = speed * Time.deltaTime;
         if (lower)
         {
+            float step = speed * Time.deltaTime;
             rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, targetPosition, step);
             if ((Vector3) rectTransform.anchoredPosition == targetPosition)
             {
@@ -34,15 +35,18 @@ public class RoundStartPanelController : MonoBehaviour
         }
         if (raise)
         {
+            float step = speed * Time.deltaTime;
             rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, hiddenPosition, step);
             if ((Vector3) rectTransform.anchoredPosition == hiddenPosition)
             {
                 raise = false;
+                PlayerInput.onEnableInput.Invoke();
             }
         }
     }
-    public void Trigger()
+    public void Trigger(int roundNumber)
     {
+        this.roundNumber.text = roundNumber.ToString();
         lower = true;
     }
     private IEnumerator Freeze(float duration)
