@@ -27,6 +27,7 @@ namespace Player_Scripts.Skills
         private IEnumerator HealAnimDelay(Player player)
         {
             player.combatState = Player.CombatState.Combat;
+            player.playerInput.DisableInput();
             player.anim.SetTrigger(name);
 
             var healthParticleGameObject = Instantiate(healthParticles, player.transform.position + new Vector3(0, healthParticleYOffset),
@@ -38,6 +39,7 @@ namespace Player_Scripts.Skills
 
             yield return new WaitForSeconds(AnimationTimes.instance.HealAnim);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
             yield return null;
         }
 

@@ -72,12 +72,12 @@ namespace Player_Scripts
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        private void EnableInput()
+        public void EnableInput()
         {
             inputIsEnabled = true;
         }
 
-        private void DisableInput()
+        public void DisableInput()
         {
             attemptLeft = false;
             attemptRight = false;
