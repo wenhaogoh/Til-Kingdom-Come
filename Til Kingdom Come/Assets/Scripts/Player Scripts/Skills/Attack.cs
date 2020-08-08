@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 namespace Player_Scripts.Skills
@@ -19,6 +20,7 @@ namespace Player_Scripts.Skills
 
         public GameObject finalComboParticle;
         private float finalComboParticleXOffset = 4f;
+        private CinemachineImpulseSource cinemachineImpulseSource;
 
         private void Awake()
         {
@@ -26,6 +28,7 @@ namespace Player_Scripts.Skills
             cooldown = chargeTime;
             charge = new Charge(maxCharge, chargeTime);
             playerLayerMask = 1 << 8;
+            cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         }
 
         private void Update()
@@ -107,6 +110,7 @@ namespace Player_Scripts.Skills
                 : new Vector3(finalComboParticleXOffset, 0); 
             Instantiate(finalComboParticle, player.transform.position + finalComboParticleOffset,
                 Quaternion.identity);
+            cinemachineImpulseSource.GenerateImpulse();
             player.combatState = Player.CombatState.NonCombat;
         }
 
