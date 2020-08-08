@@ -22,7 +22,6 @@ namespace Player_Scripts.Skills
         public override void Cast(Player player)
         {
             if (!CanCast()) return;
-
             StartCoroutine(ConfusionAnimDelay(player));
             DetectHit(player);
         }
@@ -59,9 +58,11 @@ namespace Player_Scripts.Skills
         private IEnumerator ConfusionAnimDelay(Player player)
         {
             player.combatState = Player.CombatState.Combat;
+            player.playerInput.DisableInput();
             player.anim.SetTrigger(name);
             yield return new WaitForSeconds(AnimationTimes.instance.ConfusionAnim);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
             yield return null;
         }
     }

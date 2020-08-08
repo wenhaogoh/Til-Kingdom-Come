@@ -44,7 +44,6 @@ namespace Player_Scripts.Skills
             {
                 return;
             }
-
             // Activate dark mask when charge is full
             if (charge.IsFullyCharged())
             {
@@ -52,6 +51,7 @@ namespace Player_Scripts.Skills
             }
             charge.DecreaseCharge();
             combo.SetDecay();
+            player.playerInput.DisableInput();
             switch (combo.CurrentCombo)
             {
                 case (Combo.ComboNumber.One):
@@ -76,6 +76,7 @@ namespace Player_Scripts.Skills
             DetectHit(player, damage);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
         }
         
         private IEnumerator ComboTwoAnimDelay(Player player)
@@ -90,6 +91,7 @@ namespace Player_Scripts.Skills
             DetectHit(player, damage);
             yield return new WaitForSeconds(AnimationTimes.instance.Attack2Anim - reactionDelay);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
         }
         
         private IEnumerator ComboThreeAnimDelay(Player player)
@@ -112,6 +114,7 @@ namespace Player_Scripts.Skills
                 Quaternion.identity);
             cinemachineImpulseSource.GenerateImpulse();
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
         }
 
         #endregion

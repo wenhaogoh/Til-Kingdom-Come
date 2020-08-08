@@ -44,6 +44,7 @@ namespace Player_Scripts.Skills
             player.rb.drag = tempDrag;
 
             player.combatState = Player.CombatState.Combat;
+            player.playerInput.DisableInput();
             player.anim.SetTrigger(name);
             yield return new WaitForSeconds(channelDuration);
             DetectHit(player);
@@ -51,6 +52,7 @@ namespace Player_Scripts.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.LungeAnim - channelDuration);
             player.rb.velocity = Vector2.zero;
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
             
             // Restore drag to default value
             yield return new WaitUntil(() => player.rb.velocity == Vector2.zero);

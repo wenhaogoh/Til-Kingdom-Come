@@ -41,9 +41,11 @@ namespace Player_Scripts.Skills
         private IEnumerator BlockAnimDelay(Player player)
         {
             player.combatState = Player.CombatState.Blocking;
+            player.playerInput.DisableInput();
             player.anim.SetTrigger("Block");
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
         }
 
         private void Charging()

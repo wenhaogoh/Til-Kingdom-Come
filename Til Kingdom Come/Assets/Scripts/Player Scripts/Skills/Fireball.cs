@@ -22,7 +22,6 @@ namespace Player_Scripts.Skills
         public override void Cast(Player player)
         {
             if (!CanCast()) return;
-
             StartCoroutine(FireballAnimDelay(player));
         }
 
@@ -30,6 +29,7 @@ namespace Player_Scripts.Skills
         {
             player.anim.SetTrigger(name);
             player.combatState = Player.CombatState.Combat;
+            player.playerInput.DisableInput();
             
             // Animation of player raising hand to mouth
             yield return new WaitForSeconds(handAnimDelay);
@@ -39,6 +39,7 @@ namespace Player_Scripts.Skills
             SpawnGroundFire(player);
             yield return new WaitForSeconds(AnimationTimes.instance.FireBallAnim - fireballLandDelay - handAnimDelay);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
             yield return null;
         }
 

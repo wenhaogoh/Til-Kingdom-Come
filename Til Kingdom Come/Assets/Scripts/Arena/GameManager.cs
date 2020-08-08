@@ -63,23 +63,22 @@ public class GameManager : MonoBehaviour
         else
         {
             StartCoroutine(DeathAnimationDelay());
-            
         }
     }
 
     private IEnumerator DeathAnimationDelay()
     {
         yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
-        foreach (var player in playerManager.players)
-        {
-            player.ResetPlayer();
-        }
         NextRoundEvent();
         yield return null;
     }
 
     private void NextRoundEvent()
     {
+        foreach (var player in playerManager.players)
+        {
+            player.ResetPlayer();
+        }
         int roundNumber = playerOneScore + playerTwoScore + 1;
         roundStartPanel.Trigger(roundNumber);
     }

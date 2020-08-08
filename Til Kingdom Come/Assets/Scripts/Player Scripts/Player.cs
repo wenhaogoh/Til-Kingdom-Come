@@ -48,7 +48,13 @@ namespace Player_Scripts
         public Skill[] skills = new Skill[4];
 
         #endregion
-        
+
+        #region HURT
+        private float hurtDuration = 0.4f;
+        private float hurtInterval = 0.2f;
+        private float hurtDistance = 8f;
+        private float hurtStunDuration = 0.2f;
+        #endregion
         private void Awake()
         {
             // Set player number
@@ -217,7 +223,43 @@ namespace Player_Scripts
 
         private IEnumerator Hurt()
         {
-            yield return null;
+            combatState = CombatState.Hurt;
+            // enable god mode
+            invulnerable = true;
+            // start hurt animation
+            var animationRoutine = StartCoroutine(HurtAnimation(hurtInterval));
+            // stun player
+            StartCoroutine(HurtStun(hurtStunDuration));
+            // knock player up
+            HurtKnockUp(hurtDistance);
+            yield return new WaitForSeconds(hurtDuration);
+            // stop hurt animation
+            StopCoroutine(animationRoutine);
+            spriteRenderer.color = Color.white;
+            // disable god mode
+            invulnerable = false;
+            combatState = CombatState.NonCombat;
+        }
+        private IEnumerator HurtAnimation(float interval)
+        {
+            while (true)
+            {
+                spriteRenderer.color = Color.red;
+                yield return new WaitForSeconds(interval);
+                spriteRenderer.color = Color.white;
+                yield return new WaitForSeconds(interval);
+            }
+        }
+        private IEnumerator HurtStun(float duration)
+        {
+            playerInput.DisableInput();
+            yield return new WaitForSeconds(duration);
+            playerInput.EnableInput();
+        }
+        private void HurtKnockUp(float distance)
+        {
+            var velocity = rb.velocity;
+            rb.velocity = new Vector2(velocity.x, distance);
         }
 
         public void AddSkill(GameObject skillPrefab)

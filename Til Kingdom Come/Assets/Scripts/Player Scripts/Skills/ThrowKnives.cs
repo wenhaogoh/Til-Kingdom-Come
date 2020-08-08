@@ -45,6 +45,7 @@ namespace Player_Scripts.Skills
         private IEnumerator ThrowKnivesAnimDelay(Player player)
         {
             player.combatState = Player.CombatState.Combat;
+            player.playerInput.DisableInput();
             player.anim.SetTrigger(name);
             yield return new WaitForSeconds(knifeDelay);
 
@@ -61,6 +62,7 @@ namespace Player_Scripts.Skills
             knife.GetComponent<Rigidbody2D>().velocity = speed * direction;
             yield return new WaitForSeconds(AnimationTimes.instance.ThrowKnivesAnim - knifeDelay);
             player.combatState = Player.CombatState.NonCombat;
+            player.playerInput.EnableInput();
             yield return null;
         }
 
