@@ -28,6 +28,9 @@ namespace Player_Scripts
         public PlayerInput playerInput;
         private bool invulnerable = false;
         public CombatState combatState = CombatState.NonCombat;
+        private ReskinAnimation reSkinAnimation;
+        private Vector3 spawnPosition;
+        private Quaternion spawnRotation;
 
         #endregion
 
@@ -48,14 +51,22 @@ namespace Player_Scripts
         
         private void Awake()
         {
+            // Set player number
             totalPlayers++;
             playerNo = totalPlayers;
 
+            // Initialize components
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponentInChildren<Animator>();
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             playerInput = gameObject.AddComponent<PlayerInput>();
+            reSkinAnimation = GetComponentInChildren<ReskinAnimation>();
+            
             playerInput.SetInput(playerNo);
+            reSkinAnimation.spriteSheetName = $"Player{playerNo}";
+            spawnPosition = transform.position;
+            spawnRotation = transform.rotation;
+
             SetMaxHealth(MAXHEALTH);
             RefillCurrentHealth();
         }
@@ -227,6 +238,19 @@ namespace Player_Scripts
         public void SuccessfulBlock()
         {
             Instantiate(sparks, transform.position + new Vector3(0, sparksYOffset), transform.rotation);
+        }
+
+        public void ResetPlayer()
+        {
+            anim.SetBool("Death", false);
+            anim.SetInteger("state", 0);
+            
+            RefillCurrentHealth();
+            combatState = CombatState.NonCombat;
+            
+            // Reset rotation and position
+            transform.position = spawnPosition;
+            transform.rotation = spawnRotation;
         }
     }
 }

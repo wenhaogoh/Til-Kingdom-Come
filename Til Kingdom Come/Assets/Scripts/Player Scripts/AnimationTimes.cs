@@ -19,6 +19,7 @@ namespace Player_Scripts
         private float healAnim;
         private float fireBallAnim;
         private float lungeAnim;
+        private float deathAnim;
 
         #region Getters
 
@@ -33,6 +34,7 @@ namespace Player_Scripts
         public float HealAnim => healAnim;
         public float FireBallAnim => fireBallAnim;
         public float LungeAnim => lungeAnim;
+        public float DeathAnim => deathAnim;
 
         #endregion
 
@@ -96,6 +98,9 @@ namespace Player_Scripts
                         break;
                     case "Lunge":
                         instance.lungeAnim = clip.length;
+                        break;
+                    case "Death":
+                        instance.deathAnim = clip.length;
                         break;
                 }
             }

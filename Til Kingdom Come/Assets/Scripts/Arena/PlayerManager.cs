@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     private float spawnDistance = 10f;
-    private float yOffset = -4f;
+    private float yOffset = -5f;
     public CinemachineTargetGroup group;
     public CooldownUiController playerOneCooldownUi;
     public CooldownUiController playerTwoCooldownUi;
@@ -19,11 +19,13 @@ public class PlayerManager : MonoBehaviour
     public GameObject[] basicSkills = new GameObject[3];
     public List<GameObject> selectedSkills;
 
+    public List<Player> players = new List<Player>();
+
 
     // Start is called before the first frame update
     private void Awake()
     {
-        var playerOneGameObject = Instantiate(playerPrefab, new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
+        var playerOneGameObject = Instantiate(playerPrefab, transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
         var playerTwoGameObject = Instantiate(playerPrefab, new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
         
         PlayerSetUp(playerOneGameObject, playerTwoGameObject);
@@ -32,11 +34,14 @@ public class PlayerManager : MonoBehaviour
     private void PlayerSetUp(GameObject playerOneGameObject, GameObject playerTwoGameObject)
     {
         // Add players to camera target group
-        @group.AddMember(playerOneGameObject.transform, 1, 0);
-        @group.AddMember(playerTwoGameObject.transform, 1, 0);
+        group.AddMember(playerOneGameObject.transform, 1, 0);
+        group.AddMember(playerTwoGameObject.transform, 1, 0);
 
         Player playerOne = playerOneGameObject.GetComponent<Player>();
         Player playerTwo = playerTwoGameObject.GetComponent<Player>();
+
+        players.Add(playerOne);
+        players.Add(playerTwo);
 
         // Adding skills to players
         AddBasicSkills(playerOne);

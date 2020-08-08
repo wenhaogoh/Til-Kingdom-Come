@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Player_Scripts;
 
 public class GameManager : MonoBehaviour
 {
+    public PlayerManager playerManager;
     public List<GameObject> maps;
     public TextMeshProUGUI playerOneScoreText, playerTwoScoreText;
     public RoundStartPanelController roundStartPanel;
@@ -13,6 +15,7 @@ public class GameManager : MonoBehaviour
     public PausePanelController pausePanel;
     public static Action<int> onPlayerDeath;
     private int map, wins, playerOneScore, playerTwoScore;
+
     private void Awake()
     {
         map = SetMapController.GetMap();
@@ -59,8 +62,20 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            NextRoundEvent();
+            StartCoroutine(DeathAnimationDelay());
+            
         }
+    }
+
+    private IEnumerator DeathAnimationDelay()
+    {
+        yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
+        foreach (var player in playerManager.players)
+        {
+            player.ResetPlayer();
+        }
+        NextRoundEvent();
+        yield return null;
     }
 
     private void NextRoundEvent()
