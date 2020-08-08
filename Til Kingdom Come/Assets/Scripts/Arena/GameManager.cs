@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerOneScoreText, playerTwoScoreText;
     public RoundStartPanelController roundStartPanel;
     public EndPanelController endPanel;
+    public PausePanelController pausePanel;
     public static Action<int> onPlayerDeath;
     private int map, wins, playerOneScore, playerTwoScore;
     private void Awake()
@@ -71,5 +72,6 @@ public class GameManager : MonoBehaviour
     private void PlayerWinEvent(int playerNo)
     {
         endPanel.Trigger(playerNo);
+        pausePanel.DisablePause();
     }
 }
