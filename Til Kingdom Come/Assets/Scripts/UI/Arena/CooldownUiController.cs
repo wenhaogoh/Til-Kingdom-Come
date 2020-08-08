@@ -42,6 +42,7 @@ namespace UI.Arena
                 float cooldownDuration = cooldown.GetCooldownDuration();
                 if (nextAvailableTime < Time.time) // Skill is available and ready to use
                 {
+                    darkMasks[i].fillAmount = 0;
                 }
                 else
                 {

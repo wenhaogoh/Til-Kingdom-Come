@@ -3,5 +3,7 @@
     public interface ICharge
     {
         int GetCurrentCharge();
+
+        void RefillCharges();
     }
 }

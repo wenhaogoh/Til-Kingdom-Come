@@ -8,6 +8,7 @@ namespace Player_Scripts
         public static Action onEnableInput;
         public static Action onDisableInput;
         private bool inputIsEnabled;
+        private bool isLocked;
         private KeyCode leftKey;
         private KeyCode rightKey;
         private KeyCode rollKey;
@@ -29,8 +30,9 @@ namespace Player_Scripts
         private void Awake()
         {
             inputIsEnabled = false;
-            onEnableInput += EnableInput;
-            onDisableInput += DisableInput;
+            isLocked = false;
+            onEnableInput += UnlockAndEnableInput;
+            onDisableInput += DisableAndLockInput;
         }
         private void Update()
         {
@@ -74,7 +76,10 @@ namespace Player_Scripts
 
         public void EnableInput()
         {
-            inputIsEnabled = true;
+            if (!isLocked)
+            {
+                inputIsEnabled = true;
+            }
         }
 
         public void DisableInput()
@@ -86,6 +91,24 @@ namespace Player_Scripts
             attemptBlock = false;
             attemptSkill = false;
             inputIsEnabled = false;
+        }
+
+        private void DisableAndLockInput()
+        {
+            attemptLeft = false;
+            attemptRight = false;
+            attemptRoll = false;
+            attemptAttack = false;
+            attemptBlock = false;
+            attemptSkill = false;
+            inputIsEnabled = false;
+            isLocked = true;
+        }
+
+        private void UnlockAndEnableInput()
+        {
+            isLocked = false;
+            EnableInput();
         }
 
         public void InvertMovementKeys()

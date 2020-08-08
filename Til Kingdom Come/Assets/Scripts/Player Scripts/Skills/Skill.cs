@@ -25,7 +25,6 @@ namespace Player_Scripts.Skills
                 nextAvailableTime = cooldown + Time.time;
                 return true;
             }
-
         }
 
         public abstract void Cast(Player player);
@@ -50,6 +49,10 @@ namespace Player_Scripts.Skills
         public Sprite GetIcon()
         {
             return icon;
+        }
+        public void ResetCooldown()
+        {
+            nextAvailableTime = 0;
         }
     }
 }

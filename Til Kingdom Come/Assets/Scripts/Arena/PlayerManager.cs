@@ -90,4 +90,20 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void ResetAllPlayers()
+    {
+        foreach (var player in players)
+        {
+            player.ResetPlayer();
+        }
+    }
+
+    public void EnableInvulnerabilityForAllPlayers()
+    {
+        foreach (var player in players)
+        {
+            player.enableInvulnerability();
+        }
+    }
 }

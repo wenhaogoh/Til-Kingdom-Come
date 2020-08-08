@@ -48,6 +48,10 @@
         {
             return currentCharge <= 0;
         }
-    
+
+        public void RefillCharges()
+        {
+            currentCharge = maxCharge;
+        }
     }
 }

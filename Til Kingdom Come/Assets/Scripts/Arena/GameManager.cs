@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerManager playerManager;
     public List<GameObject> maps;
-    public TextMeshProUGUI playerOneScoreText, playerTwoScoreText;
+    public TextMeshProUGUI playerOneScoreText, playerTwoScoreText, targetScore;
     public RoundStartPanelController roundStartPanel;
     public EndPanelController endPanel;
     public PausePanelController pausePanel;
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         maps[map].SetActive(true);
 
         wins = SetWinsController.GetWins();
+        targetScore.text = wins.ToString();
         playerOneScore = 0;
         playerTwoScore = 0;
 
@@ -54,38 +55,34 @@ public class GameManager : MonoBehaviour
         // trigger subsequent event
         if (playerOneScore >= wins)
         {
-            PlayerWinEvent(1);
+            StartCoroutine(PlayerWinEvent(1));
         }
         else if (playerTwoScore >= wins)
         {
-            PlayerWinEvent(2);
+            StartCoroutine(PlayerWinEvent(2));
         }
         else
         {
-            StartCoroutine(DeathAnimationDelay());
+            StartCoroutine(NextRoundEvent());
         }
     }
 
-    private IEnumerator DeathAnimationDelay()
+    private IEnumerator NextRoundEvent()
     {
+        playerManager.EnableInvulnerabilityForAllPlayers();
         yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
-        NextRoundEvent();
+        playerManager.ResetAllPlayers();
+        int roundNumber = playerOneScore + playerTwoScore + 1;
+        roundStartPanel.Trigger(roundNumber);
         yield return null;
     }
 
-    private void NextRoundEvent()
+    private IEnumerator PlayerWinEvent(int playerNo)
     {
-        foreach (var player in playerManager.players)
-        {
-            player.ResetPlayer();
-        }
-        int roundNumber = playerOneScore + playerTwoScore + 1;
-        roundStartPanel.Trigger(roundNumber);
-    }
-
-    private void PlayerWinEvent(int playerNo)
-    {
+        playerManager.EnableInvulnerabilityForAllPlayers();
+        yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
         endPanel.Trigger(playerNo);
         pausePanel.DisablePause();
+        yield return null;
     }
 }

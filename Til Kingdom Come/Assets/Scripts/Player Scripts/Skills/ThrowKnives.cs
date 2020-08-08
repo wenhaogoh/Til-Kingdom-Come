@@ -86,5 +86,10 @@ namespace Player_Scripts.Skills
 
             }
         }
+
+        public void RefillCharges()
+        {
+            charge.RefillCharges();
+        }
     }
 }

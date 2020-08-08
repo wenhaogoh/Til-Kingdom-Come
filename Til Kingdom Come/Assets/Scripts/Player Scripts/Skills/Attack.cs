@@ -180,5 +180,10 @@ namespace Player_Scripts.Skills
         {
             return charge.GetCurrentCharge();
         }
+
+        public void RefillCharges()
+        {
+            charge.RefillCharges();
+        }
     }
 }

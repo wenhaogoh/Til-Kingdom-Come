@@ -215,7 +215,7 @@ namespace Player_Scripts
 
         private void Die()
         {
-            PlayerInput.onDisableInput.Invoke();
+            playerInput.DisableInput();
             anim.SetBool("Death", true);
             Instantiate(bloodSplatter, transform.position + new Vector3(0, bloodSplatterYOffset), transform.rotation);
             GameManager.onPlayerDeath.Invoke(playerNo);
@@ -284,15 +284,39 @@ namespace Player_Scripts
 
         public void ResetPlayer()
         {
+            PlayerInput.onDisableInput.Invoke();
+            disableInvulnerability();
+
+            rb.velocity = Vector2.zero;
+
             anim.SetBool("Death", false);
             anim.SetInteger("state", 0);
             
+            foreach (Skill skill in skills)
+            {
+                skill.ResetCooldown();
+                if (skill is ICharge)
+                {
+                    ICharge chargeSkill = skill as ICharge;
+                    chargeSkill.RefillCharges();
+                }
+            }
+
             RefillCurrentHealth();
             combatState = CombatState.NonCombat;
             
             // Reset rotation and position
             transform.position = spawnPosition;
             transform.rotation = spawnRotation;
+        }
+
+        public void enableInvulnerability()
+        {
+            invulnerable = true;
+        }
+        public void disableInvulnerability()
+        {
+            invulnerable = false;
         }
     }
 }
