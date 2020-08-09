@@ -5,7 +5,6 @@ namespace Player_Scripts.Skills
     public class GroundFire : MonoBehaviour
     {
         private BoxCollider2D boxCollider2D;
-        private ParticleSystem particleSystem;
         private float fireDuration = 5f;
         private int damagePerTick = 5;
         private float timeBetweenTicks = 0.5f;
@@ -18,7 +17,6 @@ namespace Player_Scripts.Skills
             nextTime = Time.time;
             endTime = Time.time + fireDuration;
             boxCollider2D = GetComponent<BoxCollider2D>();
-            particleSystem = GetComponent<ParticleSystem>();
         }
 
         private void Update()
@@ -27,11 +25,7 @@ namespace Player_Scripts.Skills
             {
                 boxCollider2D.enabled = false;
             }
-
-            /*if (particleSystem.particleCount == 0)
-            {
-                Destroy(gameObject);
-            }*/
+            
         }
 
         private void OnTriggerStay2D(Collider2D other)
