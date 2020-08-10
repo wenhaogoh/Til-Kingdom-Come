@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cinemachine;
+using Photon.Pun;
 using Player_Scripts;
 using Player_Scripts.Interfaces;
 using UI.Arena;
@@ -25,10 +26,28 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        var playerOneGameObject = Instantiate(playerPrefab, transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
-        var playerTwoGameObject = Instantiate(playerPrefab, new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
-        
-        PlayerSetUp(playerOneGameObject, playerTwoGameObject);
+        if (GameManager.IsMultiplayer())
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                var playerOneGameObject = PhotonNetwork.Instantiate("Player", transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
+                PlayerSetUp(playerOneGameObject);
+            }
+            else
+            {
+                var playerTwoGameObject = PhotonNetwork.Instantiate("Player", new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
+                PlayerSetUp(playerTwoGameObject);
+            }
+        }
+        else
+        {
+            var playerOneGameObject = Instantiate(playerPrefab,
+                transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
+            var playerTwoGameObject = Instantiate(playerPrefab, new Vector3(spawnDistance, yOffset, 0),
+                Quaternion.Euler(0, 180, 0));
+
+            PlayerSetUp(playerOneGameObject, playerTwoGameObject);
+        }
     }
 
     private void PlayerSetUp(GameObject playerOneGameObject, GameObject playerTwoGameObject)
@@ -60,6 +79,35 @@ public class PlayerManager : MonoBehaviour
 
         playerOneHealthBar.entity = playerOne.GetComponent<IHealthBar>();
         playerTwoHealthBar.entity = playerTwo.GetComponent<IHealthBar>();
+    }
+
+    private void PlayerSetUp(GameObject playerGameObject)
+    {
+        group.AddMember(playerGameObject.transform, 1, 0);
+
+        Player player = playerGameObject.GetComponent<Player>();
+        players.Add(player);
+        
+        // Adding skills to players
+        AddBasicSkills(player);
+        var playerNo = player.GetPlayerNo();
+        if (playerNo == 1)
+        {
+            player.AddSkill(selectedSkills[SkillSelectionController.GetPlayerOneSkill()]);
+            playerOneCooldownUi.player = player.GetComponent<Player>();
+            var playerOneChargeControllers = playerOneCooldownUi.GetComponentsInChildren<ChargeController>();
+            SetCharge(player, playerOneChargeControllers);
+            playerOneHealthBar.entity = player.GetComponent<IHealthBar>();
+            
+        }
+        else
+        {
+            player.AddSkill(selectedSkills[SkillSelectionController.GetPlayerTwoSkill()]);
+            playerTwoCooldownUi.player = player.GetComponent<Player>();
+            var playerTwoChargeControllers = playerTwoCooldownUi.GetComponentsInChildren<ChargeController>();
+            SetCharge(player, playerTwoChargeControllers);
+            playerTwoHealthBar.entity = player.GetComponent<IHealthBar>();
+        }
     }
 
     private void AddBasicSkills(Player player)

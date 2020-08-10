@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public PausePanelController pausePanel;
     public static Action<int> onPlayerDeath;
     private int map, wins, playerOneScore, playerTwoScore;
+    private static bool _multiplayerMode;
 
     private void Awake()
     {
@@ -85,4 +86,16 @@ public class GameManager : MonoBehaviour
         pausePanel.DisablePause();
         yield return null;
     }
+
+    public static bool IsMultiplayer()
+    {
+        return _multiplayerMode;
+    }
+
+    public static void SetMultiplayerMode(bool multiplayerBool)
+    {
+        _multiplayerMode = multiplayerBool;
+    }
+    
+    
 }

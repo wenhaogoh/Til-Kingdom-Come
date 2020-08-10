@@ -87,7 +87,7 @@ namespace Player_Scripts
                     case "Confusion":
                         instance.confusionAnim = clip.length;
                         break;
-                    case "ThrowKnives":
+                    case "Throw Knives":
                         instance.throwKnivesAnim = clip.length;
                         break;
                     case "Heal":
