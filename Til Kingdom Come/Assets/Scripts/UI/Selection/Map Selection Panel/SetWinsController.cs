@@ -6,7 +6,15 @@ public class SetWinsController : MonoBehaviour
     public TextMeshProUGUI text;
     private static int wins = 1;
     private int maxWins = 10;
-    void Start()
+    public static int GetWins()
+    {
+        return wins;
+    }
+    public static void SetWins(int i)
+    {
+        wins = i;
+    }
+    private void Start()
     {
         text.text = wins.ToString();
     }
@@ -25,10 +33,5 @@ public class SetWinsController : MonoBehaviour
             wins--;
             text.text = wins.ToString();
         }
-    }
-
-    public static int GetWins()
-    {
-        return wins;
     }
 }

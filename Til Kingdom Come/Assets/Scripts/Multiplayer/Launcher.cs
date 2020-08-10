@@ -14,7 +14,7 @@ namespace Multiplayer
     {
         private PhotonView pv;
         public PanelsController panelsController;
-        
+        public SceneLoaderController sceneLoaderController;
         [Header("Login Panel")]
         public TMP_InputField nicknameInput;
 
@@ -26,6 +26,13 @@ namespace Multiplayer
         public TextMeshProUGUI playerOneName;
         public TextMeshProUGUI playerTwoName;
         public GameObject toSkillSelectionButton;
+
+        [Header("Skill Selection Panel")]
+        public SkillSelectionController skillSelectionController;
+        public GameObject startGameButton;
+        public GameObject readyButton;
+        public TextMeshProUGUI readyButtonText;
+        private bool isReady;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
         void Awake()
@@ -112,6 +119,29 @@ namespace Multiplayer
         {
             PhotonNetwork.LeaveRoom();
         }
+        public void OnRoomPanelNextButtonClicked()
+        {
+            photonView.RPC("OnRoomPanelNextButtonClickedRPC", RpcTarget.All);
+        }
+        [PunRPC]
+        private void OnRoomPanelNextButtonClickedRPC()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                skillSelectionController.EnableMultiplayerMode(true);
+                startGameButton.SetActive(true);
+                startGameButton.GetComponent<Button>().interactable = false;
+                readyButton.SetActive(false);
+            }
+            else
+            {
+                skillSelectionController.EnableMultiplayerMode(false);
+                startGameButton.SetActive(false);
+                readyButton.SetActive(true);
+                isReady = false;
+            }
+            panelsController.SetPanelActive("Skill Selection Panel");
+        }
         #endregion
 
         #region Lobby Panel
@@ -170,6 +200,42 @@ namespace Multiplayer
         }
         #endregion
 
+        #region Skill Selection Panel
+        public void OnReadyButtonClicked()
+        {
+            isReady = !isReady;
+            photonView.RPC("OnReadyButtonClickedRPC", RpcTarget.All, isReady);
+        }
+        [PunRPC]
+        private void OnReadyButtonClickedRPC(bool isReady)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                startGameButton.GetComponent<Button>().interactable = isReady;
+            }
+            else
+            {
+                if (isReady)
+                {
+                    readyButtonText.text = "Ready!";
+                }
+                else
+                {
+                    readyButtonText.text = "Ready?";
+                }
+            }
+        }
+        public void OnStartGameButtonClicked()
+        {
+            photonView.RPC("OnStartGameButtonRPC", RpcTarget.All);
+        }
+        [PunRPC]
+        private void OnStartGameButtonClickedRPC()
+        {
+            sceneLoaderController.LoadScene("Arena");
+        }
+        #endregion
+
         public override void OnDisconnected(DisconnectCause cause)
         {
             panelsController.SetPanelActive("Login Panel");
@@ -186,6 +252,8 @@ namespace Multiplayer
             {
                 playerOneName.text = PhotonNetwork.PlayerList[0].NickName;
                 playerTwoName.text = PhotonNetwork.PlayerList[1].NickName;
+                SetMapController.SetMap((int) PhotonNetwork.CurrentRoom.CustomProperties["map"]);
+                SetWinsController.SetWins((int) PhotonNetwork.CurrentRoom.CustomProperties["wins"]);
                 toSkillSelectionButton.SetActive(false);
             }
             panelsController.SetPanelActive("Room Panel");
@@ -200,6 +268,7 @@ namespace Multiplayer
         }
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
+            playerOneName.text = playerTwoName.text;
             playerTwoName.text = "";
             toSkillSelectionButton.GetComponent<Button>().interactable = false;
         }
@@ -223,63 +292,5 @@ namespace Multiplayer
             UpdateCachedRoomList(roomList);
             UpdateRoomListView();
         }
-        // public void OnStartButtonClicked()
-        // {
-        //     if (!PhotonNetwork.IsMasterClient)
-        //     {
-        //         Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
-        //         return;
-        //     }
-        //     // SetWinsController.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
-        //     photonView.RPC("SkillSelectRPC", RpcTarget.All);
-        //     ReadyButton.SetActive(!PhotonNetwork.IsMasterClient);
-
-        //     // skillSelectStartButton.interactable = false;
-        // }
-
-        // [PunRPC]
-        // private void SkillSelectRPC()
-        // {
-        //     SetActivePanel(SkillSelectPanel.name);
-        //     skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
-        // }
-
-        // public void OnSkillSelectStartButtonClicked()
-        // {
-        //     PhotonNetwork.LoadLevel("MultiplayerArena");
-        // }
-
-        // public void OnReadyButtonClicked()
-        // {
-        //     photonView.RPC("RPCReadyButton", RpcTarget.All);
-        // }
-
-        // [PunRPC]
-        // private void RPCReadyButton()
-        // {
-        //     Debug.Log("Sending ready button rpc");
-        //     bool isActive = skillSelectStartButton.gameObject.GetComponent<Button>().interactable;
-        //     if (PhotonNetwork.IsMasterClient)
-        //     {
-        //         skillSelectStartButton.gameObject.GetComponent<Button>().interactable = !isActive;
-        //     }
-        //     photonView.RPC("RPCReadyText", RpcTarget.All, !isActive);
-        // }
-
-        // [PunRPC]
-        // private void RPCReadyText(bool ready)
-        // {
-        //     if (!PhotonNetwork.IsMasterClient)
-        //     {
-        //         if (ready)
-        //         {
-        //             ReadyText.text = "Ready!";
-        //         }
-        //         else
-        //         {
-        //             ReadyText.text = "Ready?";
-        //         }
-        //     }
-        // }
     }
 }

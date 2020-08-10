@@ -7,7 +7,15 @@ public class SetMapController : MonoBehaviour
     public Image image;
     public List<Sprite> sprites = new List<Sprite>();
     private static int selectedMap = 0;
-    void Start()
+    public static int GetMap()
+    {
+        return selectedMap;
+    }
+    public static void SetMap(int i)
+    {
+        selectedMap = i;
+    }
+    private void Start()
     {
         image.sprite = sprites[selectedMap];
     }
@@ -28,10 +36,5 @@ public class SetMapController : MonoBehaviour
             selectedMap = sprites.Count - 1;
         }
         image.sprite = sprites[selectedMap];
-    }
-
-    public static int GetMap()
-    {
-        return selectedMap;
     }
 }

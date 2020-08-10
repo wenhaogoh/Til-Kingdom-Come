@@ -13,7 +13,21 @@ public class SkillSelectionController : MonoBehaviour
     private KeyCode playerOneRight;
     private KeyCode playerTwoLeft;
     private KeyCode playerTwoRight;
-    // Start is called before the first frame update
+    private bool multiplayer = false;
+    private bool isMasterClient;
+    public static int GetPlayerOneSkill()
+    {
+        return playerOneSkill;
+    }
+    public static int GetPlayerTwoSkill()
+    {
+        return playerTwoSkill;
+    }
+    public void EnableMultiplayerMode(bool isMasterClient)
+    {
+        this.multiplayer = true;
+        this.isMasterClient = isMasterClient;
+    }
     private void Awake()
     {
         playerOneLeft = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P1Left", "A"));
@@ -31,26 +45,57 @@ public class SkillSelectionController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(playerOneLeft))
+        if (multiplayer)
         {
-            DecreasePlayerOne();
-            UpdateSkillCellPointers();
+            if (isMasterClient)
+            {
+                if (Input.GetKeyDown(playerOneLeft))
+                {
+                    DecreasePlayerOne();
+                    UpdateSkillCellPointers();
+                }
+                else if (Input.GetKeyDown(playerOneRight))
+                {
+                    IncreasePlayerOne();
+                    UpdateSkillCellPointers();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(playerOneLeft))
+                {
+                    DecreasePlayerTwo();
+                    UpdateSkillCellPointers();
+                }
+                else if (Input.GetKeyDown(playerOneRight))
+                {
+                    IncreasePlayerTwo();
+                    UpdateSkillCellPointers();
+                }
+            }
         }
-        else if (Input.GetKeyDown(playerOneRight))
+        else
         {
-            IncreasePlayerOne();
-            UpdateSkillCellPointers();
-        }
-
-        if (Input.GetKeyDown(playerTwoLeft))
-        {
-            DecreasePlayerTwo();
-            UpdateSkillCellPointers();
-        }
-        else if (Input.GetKeyDown(playerTwoRight))
-        {
-            IncreasePlayerTwo();
-            UpdateSkillCellPointers();
+            if (Input.GetKeyDown(playerOneLeft))
+            {
+                DecreasePlayerOne();
+                UpdateSkillCellPointers();
+            }
+            else if (Input.GetKeyDown(playerOneRight))
+            {
+                IncreasePlayerOne();
+                UpdateSkillCellPointers();
+            }
+            if (Input.GetKeyDown(playerTwoLeft))
+            {
+                DecreasePlayerTwo();
+                UpdateSkillCellPointers();
+            }
+            else if (Input.GetKeyDown(playerTwoRight))
+            {
+                IncreasePlayerTwo();
+                UpdateSkillCellPointers();
+            }
         }
     }
     private void IncreasePlayerOne()
@@ -87,47 +132,71 @@ public class SkillSelectionController : MonoBehaviour
     }
     private void UpdateSkillCellPointers()
     {
-        if (playerOneSkill == playerTwoSkill)
+        if (multiplayer)
         {
-            for (int i = 0; i < skillCellsCount; i++)
+            if (isMasterClient)
             {
-                if (i == playerOneSkill)
+                for (int i = 0; i < skillCellsCount; i++)
                 {
-                    skillCells[i].GetComponent<SkillCellController>().SelectedByBothPlayers();
+                    if (i == playerOneSkill)
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerOne();
+                    }
+                    else
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    }
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < skillCellsCount; i++)
                 {
-                    skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    if (i == playerTwoSkill)
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerTwo();
+                    }
+                    else
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    }
                 }
             }
         }
         else
         {
-            for (int i = 0; i < skillCellsCount; i++)
+            if (playerOneSkill == playerTwoSkill)
             {
-                if (i == playerOneSkill)
+                for (int i = 0; i < skillCellsCount; i++)
                 {
-                    skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerOne();
+                    if (i == playerOneSkill)
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().SelectedByBothPlayers();
+                    }
+                    else
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    }
                 }
-                else if (i == playerTwoSkill)
+            }
+            else
+            {
+                for (int i = 0; i < skillCellsCount; i++)
                 {
-                    skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerTwo();
-                }
-                else
-                {
-                    skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    if (i == playerOneSkill)
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerOne();
+                    }
+                    else if (i == playerTwoSkill)
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().SelectedByPlayerTwo();
+                    }
+                    else
+                    {
+                        skillCells[i].GetComponent<SkillCellController>().NotSelected();
+                    }
                 }
             }
         }
-    }
-
-    public static int GetPlayerOneSkill()
-    {
-        return playerOneSkill;
-    }
-
-    public static int GetPlayerTwoSkill()
-    {
-        return playerTwoSkill;
     }
 }
