@@ -26,27 +26,6 @@ namespace Multiplayer
         public TextMeshProUGUI playerOneName;
         public TextMeshProUGUI playerTwoName;
         public GameObject toSkillSelectionButton;
-    
-
-        // [Header("Create Room Panel")]
-        // public GameObject CreateRoomPanel;
-
-        // [Header("Lobby Panel")]
-        // public GameObject RoomListPanel;
-        // public GameObject RoomListContent;
-        // public GameObject RoomListEntryPrefab;
-
-        // [Header("Room Panel")]
-        // public GameObject RoomLobbyPanel;
-        // public Transform LobbyHorizontalLayoutGroup;
-        // public GameObject PlayerEntryPrefab;
-        // public GameObject startButton;
-
-        // [Header("Skill Select Panel")] 
-        // public GameObject SkillSelectPanel;
-        // public GameObject ReadyButton;
-        // public TextMeshProUGUI ReadyText;
-        // public Button skillSelectStartButton;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
         void Awake()
@@ -101,6 +80,14 @@ namespace Multiplayer
             }
             PhotonNetwork.Disconnect();
         }
+        public void OnJoinRoomButtonClicked()
+        {
+            if (!PhotonNetwork.InLobby)
+            {
+                PhotonNetwork.JoinLobby();
+            }
+            panelsController.SetPanelActive("Lobby Panel");
+        }
         #endregion
 
         #region Map Selection Panel
@@ -109,19 +96,14 @@ namespace Multiplayer
             string roomName = PlayerPrefs.GetString("Nickname", "") + "'s room";
 
             var roomOptions = new RoomOptions();
-            
-            Hashtable properties = new Hashtable();
-            properties.Add("wins", SetWinsController.GetWins());
-            properties.Add("map", SetMapController.GetMap());
-            
-            roomOptions.MaxPlayers = 2;
+
+            Hashtable properties = new Hashtable() {{"wins", SetWinsController.GetWins()}, {"map", SetMapController.GetMap()}};
             roomOptions.CustomRoomProperties = properties;
+            roomOptions.CustomRoomPropertiesForLobby = new string[] {"wins", "map"};
+
+            roomOptions.MaxPlayers = 2;
 
             PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
-        }
-        public void OnJoinRoomButtonClicked()
-        {
-            panelsController.SetPanelActive("Lobby Panel");
         }
         #endregion
 
@@ -135,10 +117,6 @@ namespace Multiplayer
         #region Lobby Panel
         public void OnLobbyPanelBackButtonClicked()
         {
-            if (!PhotonNetwork.InLobby)
-            {
-                PhotonNetwork.JoinLobby();
-            }
             panelsController.SetPanelActive("Selection Panel");
         }
 
@@ -180,6 +158,11 @@ namespace Multiplayer
         {
             foreach (RoomInfo info in cachedRoomList.Values)
             {
+                string roomName = info.Name;
+                int playerCount = info.PlayerCount;
+                int maxPlayers = info.MaxPlayers;
+                var wins = info.CustomProperties["wins"];
+                var map = info.CustomProperties["map"];
                 GameObject roomListEntry = Instantiate(roomListEntryPrefab);
                 roomListEntry.transform.SetParent(roomListContent.transform);
                 roomListEntry.GetComponent<RoomListEntry>().Initialize(info.Name, info.PlayerCount, (int) info.MaxPlayers, (int) info.CustomProperties["wins"], (int) info.CustomProperties["map"]);
