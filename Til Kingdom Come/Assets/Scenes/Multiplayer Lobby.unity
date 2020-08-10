@@ -1774,6 +1774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelsController: {fileID: 187372561}
+  sceneLoaderController: {fileID: 1560197411}
   nicknameInput: {fileID: 734417658}
   roomListContent: {fileID: 2106711019}
   roomListEntryPrefab: {fileID: 5039420016897184852, guid: 5efa218ed3905a04d89aa9607d45fde2,
@@ -1781,6 +1782,10 @@ MonoBehaviour:
   playerOneName: {fileID: 1488114222}
   playerTwoName: {fileID: 1089503387}
   toSkillSelectionButton: {fileID: 1346436098}
+  skillSelectionController: {fileID: 1290356459}
+  startGameButton: {fileID: 944811285}
+  readyButton: {fileID: 2045181743}
+  readyButtonText: {fileID: 1780636515}
 --- !u!114 &475608262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2907,7 +2912,7 @@ PrefabInstance:
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
@@ -2947,7 +2952,7 @@ PrefabInstance:
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
@@ -2962,7 +2967,7 @@ PrefabInstance:
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActivePanel
+      value: OnSelectionPanelBackButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3249332201168453557, guid: 7015604b91de5e549be76f7de8b6bad6,
         type: 3}
@@ -3483,6 +3488,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &944811285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7210755943241389316, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 954227977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &954227977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3633,7 +3644,7 @@ PrefabInstance:
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnSkillSelectStartButtonClicked
+      value: OnStartGameButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
@@ -3649,6 +3660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Next Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210755943241389316, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_Name
+      value: Start Game Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f9f34b9f562f574292c0224ec00d0c4, type: 3}
@@ -3779,6 +3795,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Multiplayer.Launcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 475608261}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnRoomPanelNextButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6244896643153136359, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
@@ -7486,7 +7537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 349024.2}
+  m_AnchoredPosition: {x: 0, y: 459196.7}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2106711021
