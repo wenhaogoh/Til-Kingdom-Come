@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Photon.Pun;
 using Player_Scripts.Interfaces;
 using Player_Scripts.Skills;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Player_Scripts
     public class Player : Entity, IDamageable
     {
         public static int totalPlayers = 0;
+        private PhotonView pv;
         private int playerNo;
         public enum CombatState { NonCombat, Blocking, Rolling, Hurt, Combat, Dead}
 
@@ -57,6 +59,11 @@ namespace Player_Scripts
         #endregion
         private void Awake()
         {
+            if (GameManager.IsMultiplayer())
+            {
+                pv = GetComponent<PhotonView>();
+            }
+            
             // Set player number
             totalPlayers++;
             playerNo = totalPlayers;
@@ -79,6 +86,10 @@ namespace Player_Scripts
 
         private void Update()
         {
+            if (GameManager.IsMultiplayer())
+            {
+                if (!pv.IsMine) return;
+            }
             if (combatState == CombatState.Dead) return;
 
             if (combatState == CombatState.NonCombat)
@@ -128,7 +139,14 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptAttack)
             {
-                skills[0].Cast(this);
+                if (GameManager.IsMultiplayer())
+                {
+                    pv.RPC("RPCAttack", RpcTarget.All);
+                }
+                else
+                {
+                    skills[0].Cast(this);
+                }
             }
         }
 
@@ -136,7 +154,14 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptBlock)
             {
-                skills[1].Cast(this);
+                if (GameManager.IsMultiplayer())
+                {
+                    pv.RPC("RPCBlock", RpcTarget.All);
+                }
+                else
+                {
+                    skills[1].Cast(this);
+                }
             }
         }
 
@@ -144,7 +169,14 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptRoll)
             {
-                skills[2].Cast(this);
+                if (GameManager.IsMultiplayer())
+                {
+                    pv.RPC("RPCRoll", RpcTarget.All);
+                }
+                else
+                {
+                    skills[2].Cast(this);
+                }
             }
         }
 
@@ -152,10 +184,45 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptSkill)
             {
-                skills[3].Cast(this);
+                if (GameManager.IsMultiplayer())
+                {
+                    pv.RPC("RPCSkill", RpcTarget.All);
+                }
+                else
+                {
+                    skills[3].Cast(this);
+                }
             }
         }
 
+        #endregion
+        
+        #region RPC METHODS
+
+        [PunRPC]
+        private void RPCAttack()
+        {
+            skills[0].Cast(this);
+        }
+        
+        [PunRPC]
+        private void RPCBlock()
+        {
+            skills[1].Cast(this);
+        }
+        
+        [PunRPC]
+        private void RPCRoll()
+        {
+            skills[2].Cast(this);
+        }
+        
+        [PunRPC]
+        private void RPCSkill()
+        {
+            skills[3].Cast(this);
+        }
+        
         #endregion
         
         private void RotateLeft()
@@ -317,6 +384,11 @@ namespace Player_Scripts
         public void disableInvulnerability()
         {
             invulnerable = false;
+        }
+
+        public int GetPlayerNo()
+        {
+            return playerNo;
         }
     }
 }

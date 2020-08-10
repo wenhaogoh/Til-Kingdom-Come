@@ -41,6 +41,10 @@ MonoBehaviour:
   - RPCReadyButton
   - RPCReadyText
   - SkillSelectRPC
+  - RPCAttack
+  - RPCBlock
+  - RPCRoll
+  - RPCSkill
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0
