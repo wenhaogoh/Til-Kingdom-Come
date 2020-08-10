@@ -7,31 +7,28 @@ namespace Multiplayer.Lobby
 {
     public class RoomListEntry : MonoBehaviour
     {
-        public TextMeshProUGUI RoomNameText;
-        public TextMeshProUGUI RoomPlayersText;
-        public Button JoinRoomButton;
-
-        private string roomName;
-
-        public void Start()
+        public TextMeshProUGUI roomName;
+        public TextMeshProUGUI playerCount;
+        public TextMeshProUGUI maxPlayers;
+        public TextMeshProUGUI wins;
+        public TextMeshProUGUI map;
+        public Button joinRoom;
+        public void Initialize(string roomName, int playerCount, int maxPlayers, int wins, int map)
         {
-            JoinRoomButton.onClick.AddListener(() =>
+            this.roomName.text = roomName;
+            this.playerCount.text = playerCount.ToString();
+            this.maxPlayers.text = maxPlayers.ToString();
+            this.wins.text = wins.ToString();
+            this.map.text = map.ToString();
+
+            joinRoom.onClick.AddListener(() =>
             {
                 if (PhotonNetwork.InLobby)
                 {
                     PhotonNetwork.LeaveLobby();
                 }
-
                 PhotonNetwork.JoinRoom(roomName);
             });
-        }
-
-        public void Initialize(string name, byte currentPlayers, byte maxPlayers)
-        {
-            roomName = name;
-
-            RoomNameText.text = name;
-            RoomPlayersText.text = "Players: " + currentPlayers + "/" + maxPlayers;
         }
     }
 }
