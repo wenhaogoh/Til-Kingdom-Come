@@ -70,10 +70,10 @@ namespace Player_Scripts
 
             // Initialize components
             rb = GetComponent<Rigidbody2D>();
-            anim = GetComponentInChildren<Animator>();
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            anim = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             playerInput = gameObject.AddComponent<PlayerInput>();
-            reSkinAnimation = GetComponentInChildren<ReskinAnimation>();
+            reSkinAnimation = GetComponent<ReskinAnimation>();
             
             playerInput.SetInput(playerNo);
             reSkinAnimation.spriteSheetName = $"Player{playerNo}";

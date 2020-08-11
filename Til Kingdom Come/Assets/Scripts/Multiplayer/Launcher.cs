@@ -245,6 +245,7 @@ namespace Multiplayer
         [PunRPC]
         private void startGameRPC()
         {
+            GameManager.SetMultiplayerMode(true);
             sceneLoaderController.LoadScene("Arena");
         }
         public void OnStartGameButtonClicked()

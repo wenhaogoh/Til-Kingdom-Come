@@ -31,12 +31,22 @@ public class PlayerManager : MonoBehaviour
             if (PhotonNetwork.IsMasterClient)
             {
                 var playerOneGameObject = PhotonNetwork.Instantiate("Player", transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
+                playerOneGameObject.transform.parent = transform;
+                playerOneGameObject.name = "Player 1";
                 PlayerSetUp(playerOneGameObject);
+                var otherPlayer = GameObject.Find("Player(Clone)");
+                PlayerSetUp(otherPlayer);
+
             }
             else
             {
                 var playerTwoGameObject = PhotonNetwork.Instantiate("Player", new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
+                playerTwoGameObject.transform.parent = transform;
+                playerTwoGameObject.name = "Player 2";
                 PlayerSetUp(playerTwoGameObject);
+                var otherPlayer = GameObject.Find("Player(Clone)");
+                PlayerSetUp(otherPlayer);
+
             }
         }
         else

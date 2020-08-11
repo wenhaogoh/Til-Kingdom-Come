@@ -28,4 +28,9 @@ public class SceneLoaderController : MonoBehaviour
     {
         AudioController.instance.PlayMusic(name);
     }
+
+    public void SetMultiplayer(bool multiplayerBool)
+    {
+        GameManager.SetMultiplayerMode(multiplayerBool);
+    }
 }
