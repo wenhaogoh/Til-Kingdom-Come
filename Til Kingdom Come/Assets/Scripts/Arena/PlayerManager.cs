@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using Photon.Pun;
 using Player_Scripts;
@@ -33,20 +34,17 @@ public class PlayerManager : MonoBehaviour
                 var playerOneGameObject = PhotonNetwork.Instantiate("Player", transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
                 playerOneGameObject.transform.parent = transform;
                 playerOneGameObject.name = "Player 1";
-                PlayerSetUp(playerOneGameObject);
-                var otherPlayer = GameObject.Find("Player(Clone)");
-                PlayerSetUp(otherPlayer);
-
+                PlayerSetUp(playerOneGameObject, 1);
+                StartCoroutine(FindPlayerDelay(2));
             }
             else
             {
                 var playerTwoGameObject = PhotonNetwork.Instantiate("Player", new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
                 playerTwoGameObject.transform.parent = transform;
                 playerTwoGameObject.name = "Player 2";
-                PlayerSetUp(playerTwoGameObject);
-                var otherPlayer = GameObject.Find("Player(Clone)");
-                PlayerSetUp(otherPlayer);
-
+                PlayerSetUp(playerTwoGameObject, 2);
+                var playerOneGameObject = GameObject.Find("Player(Clone)");
+                StartCoroutine(FindPlayerDelay(1));
             }
         }
         else
@@ -56,51 +54,21 @@ public class PlayerManager : MonoBehaviour
             var playerTwoGameObject = Instantiate(playerPrefab, new Vector3(spawnDistance, yOffset, 0),
                 Quaternion.Euler(0, 180, 0));
 
-            PlayerSetUp(playerOneGameObject, playerTwoGameObject);
+            PlayerSetUp(playerOneGameObject, 1);
+            PlayerSetUp(playerTwoGameObject, 2);
         }
     }
 
-    private void PlayerSetUp(GameObject playerOneGameObject, GameObject playerTwoGameObject)
-    {
-        // Add players to camera target group
-        group.AddMember(playerOneGameObject.transform, 1, 0);
-        group.AddMember(playerTwoGameObject.transform, 1, 0);
-
-        Player playerOne = playerOneGameObject.GetComponent<Player>();
-        Player playerTwo = playerTwoGameObject.GetComponent<Player>();
-
-        players.Add(playerOne);
-        players.Add(playerTwo);
-
-        // Adding skills to players
-        AddBasicSkills(playerOne);
-        AddBasicSkills(playerTwo);
-        playerOne.AddSkill(selectedSkills[SkillSelectionController.GetPlayerOneSkill()]);
-        playerTwo.AddSkill(selectedSkills[SkillSelectionController.GetPlayerTwoSkill()]);
-        
-        playerOneCooldownUi.player = playerOne.GetComponent<Player>();
-        playerTwoCooldownUi.player = playerTwo.GetComponent<Player>();
-
-        var playerOneChargeControllers = playerOneCooldownUi.GetComponentsInChildren<ChargeController>();
-        var playerTwoChargeControllers = playerTwoCooldownUi.GetComponentsInChildren<ChargeController>();
-
-        SetCharge(playerOne, playerOneChargeControllers);
-        SetCharge(playerTwo, playerTwoChargeControllers);
-
-        playerOneHealthBar.entity = playerOne.GetComponent<IHealthBar>();
-        playerTwoHealthBar.entity = playerTwo.GetComponent<IHealthBar>();
-    }
-
-    private void PlayerSetUp(GameObject playerGameObject)
+    private void PlayerSetUp(GameObject playerGameObject, int playerNo)
     {
         group.AddMember(playerGameObject.transform, 1, 0);
 
         Player player = playerGameObject.GetComponent<Player>();
+        player.SetPlayerNo(playerNo);
         players.Add(player);
         
         // Adding skills to players
         AddBasicSkills(player);
-        var playerNo = player.GetPlayerNo();
         if (playerNo == 1)
         {
             player.AddSkill(selectedSkills[SkillSelectionController.GetPlayerOneSkill()]);
@@ -118,6 +86,14 @@ public class PlayerManager : MonoBehaviour
             SetCharge(player, playerTwoChargeControllers);
             playerTwoHealthBar.entity = player.GetComponent<IHealthBar>();
         }
+    }
+
+    private IEnumerator FindPlayerDelay(int playerNo)
+    {
+        yield return new WaitForSeconds(1f);
+        var playerTwoGameObject = GameObject.Find("Player(Clone)");
+        PlayerSetUp(playerTwoGameObject, playerNo);
+        yield return null;
     }
 
     private void AddBasicSkills(Player player)

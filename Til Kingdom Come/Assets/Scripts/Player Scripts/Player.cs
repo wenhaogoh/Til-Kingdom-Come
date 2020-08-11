@@ -390,5 +390,10 @@ namespace Player_Scripts
         {
             return playerNo;
         }
+
+        public void SetPlayerNo(int playerNo)
+        {
+            this.playerNo = playerNo;
+        }
     }
 }
