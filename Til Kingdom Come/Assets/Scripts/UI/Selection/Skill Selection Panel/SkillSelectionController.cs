@@ -15,6 +15,7 @@ public class SkillSelectionController : MonoBehaviour
     private KeyCode playerTwoRight;
     private bool multiplayer = false;
     private bool isMasterClient;
+    private bool inputEnabled;
     public static int GetPlayerOneSkill()
     {
         return playerOneSkill;
@@ -23,10 +24,27 @@ public class SkillSelectionController : MonoBehaviour
     {
         return playerTwoSkill;
     }
+    public static void SetPlayerOneSkill(int skill)
+    {
+        playerOneSkill = skill;
+    }
+    public static void SetPlayerTwoSkill(int skill)
+    {
+        playerTwoSkill = skill;
+    }
     public void EnableMultiplayerMode(bool isMasterClient)
     {
         this.multiplayer = true;
         this.isMasterClient = isMasterClient;
+        UpdateSkillCellPointers();
+    }
+    public void EnableInput()
+    {
+        inputEnabled = true;
+    }
+    public void DisableInput()
+    {
+        inputEnabled = false;
     }
     private void Awake()
     {
@@ -34,6 +52,8 @@ public class SkillSelectionController : MonoBehaviour
         playerOneRight = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P1Right", "D"));
         playerTwoLeft = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P2Left", "LeftArrow"));
         playerTwoRight = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P2Right", "RightArrow"));
+
+        inputEnabled = true;
     }
     private void Start()
     {
@@ -45,9 +65,38 @@ public class SkillSelectionController : MonoBehaviour
     }
     private void Update()
     {
-        if (multiplayer)
+        if (inputEnabled)
         {
-            if (isMasterClient)
+            if (multiplayer)
+            {
+                if (isMasterClient)
+                {
+                    if (Input.GetKeyDown(playerOneLeft))
+                    {
+                        DecreasePlayerOne();
+                        UpdateSkillCellPointers();
+                    }
+                    else if (Input.GetKeyDown(playerOneRight))
+                    {
+                        IncreasePlayerOne();
+                        UpdateSkillCellPointers();
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(playerOneLeft))
+                    {
+                        DecreasePlayerTwo();
+                        UpdateSkillCellPointers();
+                    }
+                    else if (Input.GetKeyDown(playerOneRight))
+                    {
+                        IncreasePlayerTwo();
+                        UpdateSkillCellPointers();
+                    }
+                }
+            }
+            else
             {
                 if (Input.GetKeyDown(playerOneLeft))
                 {
@@ -59,42 +108,16 @@ public class SkillSelectionController : MonoBehaviour
                     IncreasePlayerOne();
                     UpdateSkillCellPointers();
                 }
-            }
-            else
-            {
-                if (Input.GetKeyDown(playerOneLeft))
+                if (Input.GetKeyDown(playerTwoLeft))
                 {
                     DecreasePlayerTwo();
                     UpdateSkillCellPointers();
                 }
-                else if (Input.GetKeyDown(playerOneRight))
+                else if (Input.GetKeyDown(playerTwoRight))
                 {
                     IncreasePlayerTwo();
                     UpdateSkillCellPointers();
                 }
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(playerOneLeft))
-            {
-                DecreasePlayerOne();
-                UpdateSkillCellPointers();
-            }
-            else if (Input.GetKeyDown(playerOneRight))
-            {
-                IncreasePlayerOne();
-                UpdateSkillCellPointers();
-            }
-            if (Input.GetKeyDown(playerTwoLeft))
-            {
-                DecreasePlayerTwo();
-                UpdateSkillCellPointers();
-            }
-            else if (Input.GetKeyDown(playerTwoRight))
-            {
-                IncreasePlayerTwo();
-                UpdateSkillCellPointers();
             }
         }
     }

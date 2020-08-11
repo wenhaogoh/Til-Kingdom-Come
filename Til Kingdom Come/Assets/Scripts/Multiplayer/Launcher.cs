@@ -29,8 +29,6 @@ namespace Multiplayer
 
         [Header("Skill Selection Panel")]
         public SkillSelectionController skillSelectionController;
-        public GameObject startGameButton;
-        public GameObject readyButton;
         public TextMeshProUGUI readyButtonText;
         private bool isReady;
 
@@ -129,15 +127,11 @@ namespace Multiplayer
             if (PhotonNetwork.IsMasterClient)
             {
                 skillSelectionController.EnableMultiplayerMode(true);
-                startGameButton.SetActive(true);
-                startGameButton.GetComponent<Button>().interactable = false;
-                readyButton.SetActive(false);
+                isReady = false;
             }
             else
             {
                 skillSelectionController.EnableMultiplayerMode(false);
-                startGameButton.SetActive(false);
-                readyButton.SetActive(true);
                 isReady = false;
             }
             panelsController.SetPanelActive("Skill Selection Panel");
@@ -171,7 +165,6 @@ namespace Multiplayer
                     }
                     continue;
                 }
-
                 // Update cached room info
                 if (cachedRoomList.ContainsKey(info.Name))
                 {
@@ -204,30 +197,59 @@ namespace Multiplayer
         public void OnReadyButtonClicked()
         {
             isReady = !isReady;
-            photonView.RPC("OnReadyButtonClickedRPC", RpcTarget.All, isReady);
-        }
-        [PunRPC]
-        private void OnReadyButtonClickedRPC(bool isReady)
-        {
-            if (PhotonNetwork.IsMasterClient)
+            if (isReady)
             {
-                startGameButton.GetComponent<Button>().interactable = isReady;
-            }
-            else
-            {
-                if (isReady)
+                skillSelectionController.DisableInput();
+                if (PhotonNetwork.IsMasterClient)
                 {
-                    readyButtonText.text = "Ready!";
+                    photonView.RPC("OnMasterClientReadyRPC", RpcTarget.All, SkillSelectionController.GetPlayerOneSkill());
                 }
                 else
                 {
-                    readyButtonText.text = "Ready?";
+                    photonView.RPC("OnNonMasterClientReadyRPC", RpcTarget.All, SkillSelectionController.GetPlayerTwoSkill());
+                }
+                readyButtonText.text = "Ready!";
+            }
+            else
+            {
+                skillSelectionController.EnableInput();
+                readyButtonText.text = "Ready?";
+            }
+        }
+        [PunRPC]
+        private void OnMasterClientReadyRPC(int skill)
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                SkillSelectionController.SetPlayerOneSkill(skill);
+                if (isReady)
+                {
+                    // both players are ready
+                    photonView.RPC("startGameRPC", RpcTarget.All);
                 }
             }
         }
+        [PunRPC]
+        private void OnNonMasterClientReadyRPC(int skill)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                SkillSelectionController.SetPlayerTwoSkill(skill);
+                if (isReady)
+                {
+                    // both players are ready
+                    photonView.RPC("startGameRPC", RpcTarget.All);
+                }
+            }
+        }
+        [PunRPC]
+        private void startGameRPC()
+        {
+            sceneLoaderController.LoadScene("Arena");
+        }
         public void OnStartGameButtonClicked()
         {
-            photonView.RPC("OnStartGameButtonRPC", RpcTarget.All);
+            photonView.RPC("OnStartGameButtonClickedRPC", RpcTarget.All);
         }
         [PunRPC]
         private void OnStartGameButtonClickedRPC()
@@ -235,7 +257,6 @@ namespace Multiplayer
             sceneLoaderController.LoadScene("Arena");
         }
         #endregion
-
         public override void OnDisconnected(DisconnectCause cause)
         {
             panelsController.SetPanelActive("Login Panel");
@@ -258,7 +279,6 @@ namespace Multiplayer
             }
             panelsController.SetPanelActive("Room Panel");
         }
-
         public override void OnLeftRoom()
         {
             panelsController.SetPanelActive("Selection Panel");
@@ -272,7 +292,6 @@ namespace Multiplayer
             playerTwoName.text = "";
             toSkillSelectionButton.GetComponent<Button>().interactable = false;
         }
-        
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             playerTwoName.text = newPlayer.NickName;

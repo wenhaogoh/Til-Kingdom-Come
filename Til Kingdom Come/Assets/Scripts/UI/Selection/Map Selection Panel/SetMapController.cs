@@ -11,9 +11,9 @@ public class SetMapController : MonoBehaviour
     {
         return selectedMap;
     }
-    public static void SetMap(int i)
+    public static void SetMap(int map)
     {
-        selectedMap = i;
+        selectedMap = map;
     }
     private void Start()
     {
