@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
                 var playerOneGameObject = PhotonNetwork.Instantiate("Player", transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
                 playerOneGameObject.name = "Player 1";
                 PlayerSetUp(playerOneGameObject, 1);
+                playerOneCooldownUi.AssignIcons(playerOneGameObject.GetComponent<Player>());
                 StartCoroutine(FindPlayerDelay(2));
             }
             else
@@ -41,7 +42,7 @@ public class PlayerManager : MonoBehaviour
                 var playerTwoGameObject = PhotonNetwork.Instantiate("Player", new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
                 playerTwoGameObject.name = "Player 2";
                 PlayerSetUp(playerTwoGameObject, 2);
-                var playerOneGameObject = GameObject.Find("Player(Clone)");
+                playerTwoCooldownUi.AssignIcons(playerTwoGameObject.GetComponent<Player>());
                 StartCoroutine(FindPlayerDelay(1));
             }
         }
