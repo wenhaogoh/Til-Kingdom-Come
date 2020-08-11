@@ -15,14 +15,9 @@ namespace UI.Arena
 
         private void Start()
         {
-            // Assign icons for each skill
-            for(int i = 0; i < NUMBEROFSKILLS; i++)
+            if (!GameManager.IsMultiplayer())
             {
-                if (player.skills[i] == null)
-                {
-                    continue;
-                }
-                cooldowns[i] = player.skills[i];
+                AssignIcons(player);
             }
         }
 
@@ -48,6 +43,19 @@ namespace UI.Arena
                 {
                     darkMasks[i].fillAmount = Mathf.Lerp(0f, 1f, (nextAvailableTime - Time.time) / cooldownDuration);
                 }
+            }
+        }
+
+        public void AssignIcons(Player player)
+        {
+            // Assign icons for each skill
+            for(int i = 0; i < NUMBEROFSKILLS; i++)
+            {
+                if (player.skills[i] == null)
+                {
+                    continue;
+                }
+                cooldowns[i] = player.skills[i];
             }
         }
     }

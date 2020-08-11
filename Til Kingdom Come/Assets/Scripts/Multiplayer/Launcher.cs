@@ -242,11 +242,17 @@ namespace Multiplayer
                 }
             }
         }
+
         [PunRPC]
         private void startGameRPC()
         {
             GameManager.SetMultiplayerMode(true);
-            sceneLoaderController.LoadScene("Arena");
+            // sceneLoaderController.LoadScene("Arena");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("Arena");
+            }
+
         }
         public void OnStartGameButtonClicked()
         {

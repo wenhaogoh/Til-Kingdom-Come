@@ -32,7 +32,6 @@ public class PlayerManager : MonoBehaviour
             if (PhotonNetwork.IsMasterClient)
             {
                 var playerOneGameObject = PhotonNetwork.Instantiate("Player", transform.position + new Vector3(-spawnDistance, yOffset, 0), Quaternion.identity);
-                playerOneGameObject.transform.parent = transform;
                 playerOneGameObject.name = "Player 1";
                 PlayerSetUp(playerOneGameObject, 1);
                 StartCoroutine(FindPlayerDelay(2));
@@ -40,7 +39,6 @@ public class PlayerManager : MonoBehaviour
             else
             {
                 var playerTwoGameObject = PhotonNetwork.Instantiate("Player", new Vector3(spawnDistance, yOffset, 0), Quaternion.Euler(0, 180, 0));
-                playerTwoGameObject.transform.parent = transform;
                 playerTwoGameObject.name = "Player 2";
                 PlayerSetUp(playerTwoGameObject, 2);
                 var playerOneGameObject = GameObject.Find("Player(Clone)");
@@ -91,8 +89,16 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator FindPlayerDelay(int playerNo)
     {
         yield return new WaitForSeconds(1f);
-        var playerTwoGameObject = GameObject.Find("Player(Clone)");
-        PlayerSetUp(playerTwoGameObject, playerNo);
+        var playerGameObject = GameObject.Find("Player(Clone)");
+        PlayerSetUp(playerGameObject, playerNo);
+        if (playerNo == 1)
+        {
+            playerOneCooldownUi.AssignIcons(playerGameObject.GetComponent<Player>());
+        }
+        else
+        {
+            playerTwoCooldownUi.AssignIcons(playerGameObject.GetComponent<Player>());
+        }
         yield return null;
     }
 
