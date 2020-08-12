@@ -74,9 +74,8 @@ namespace Player_Scripts
             spriteRenderer = GetComponent<SpriteRenderer>();
             playerInput = gameObject.AddComponent<PlayerInput>();
             reSkinAnimation = GetComponent<ReskinAnimation>();
-            
+
             playerInput.SetInput(playerNo);
-            reSkinAnimation.spriteSheetName = $"Player{playerNo}";
             spawnPosition = transform.position;
             spawnRotation = transform.rotation;
 
@@ -394,6 +393,11 @@ namespace Player_Scripts
         public void SetPlayerNo(int playerNo)
         {
             this.playerNo = playerNo;
+        }
+
+        public void SetSkin(int playerNo)
+        {
+            reSkinAnimation.spriteSheetName = $"Player{playerNo}";
         }
     }
 }
