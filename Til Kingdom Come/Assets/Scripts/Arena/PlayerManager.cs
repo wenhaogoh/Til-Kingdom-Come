@@ -64,6 +64,7 @@ public class PlayerManager : MonoBehaviour
 
         Player player = playerGameObject.GetComponent<Player>();
         player.SetPlayerNo(playerNo);
+        player.SetSkin(playerNo);
         players.Add(player);
         
         // Adding skills to players
