@@ -110,6 +110,10 @@ namespace Multiplayer
 
             PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
+        public void OnMapSelectionSceneBackButtonClicked()
+        {
+            panelsController.SetPanelActive("Selection Panel");
+        }
         #endregion
 
         #region Room Panel
@@ -126,12 +130,12 @@ namespace Multiplayer
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                skillSelectionController.EnableMultiplayerMode(true);
+                skillSelectionController.OnlineReset(true);
                 isReady = false;
             }
             else
             {
-                skillSelectionController.EnableMultiplayerMode(false);
+                skillSelectionController.OnlineReset(false);
                 isReady = false;
             }
             panelsController.SetPanelActive("Skill Selection Panel");
@@ -142,6 +146,7 @@ namespace Multiplayer
         public void OnLobbyPanelBackButtonClicked()
         {
             panelsController.SetPanelActive("Selection Panel");
+            PhotonNetwork.LeaveLobby();
         }
 
         private void ClearRoomListView()
@@ -194,6 +199,21 @@ namespace Multiplayer
         #endregion
 
         #region Skill Selection Panel
+        public void OnSkillSelectionPanelBackButtonClicked()
+        {
+            photonView.RPC("ReturnToRoomPanelRPC", RpcTarget.All);
+        }
+        [PunRPC]
+        public void ReturnToRoomPanelRPC()
+        {
+            panelsController.SetPanelActive("Room Panel");
+            ResetSkillSelection();
+        }
+        private void ResetSkillSelection()
+        {
+            isReady = false;
+            readyButtonText.text = "Ready?";
+        }
         public void OnReadyButtonClicked()
         {
             isReady = !isReady;
@@ -242,12 +262,10 @@ namespace Multiplayer
                 }
             }
         }
-
         [PunRPC]
         private void startGameRPC()
         {
             GameManager.SetMultiplayerMode(true);
-            // sceneLoaderController.LoadScene("Arena");
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel("Arena");
@@ -264,6 +282,7 @@ namespace Multiplayer
             sceneLoaderController.LoadScene("Arena");
         }
         #endregion
+
         public override void OnDisconnected(DisconnectCause cause)
         {
             panelsController.SetPanelActive("Login Panel");

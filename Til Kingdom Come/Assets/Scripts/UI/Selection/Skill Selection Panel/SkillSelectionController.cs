@@ -13,7 +13,7 @@ public class SkillSelectionController : MonoBehaviour
     private KeyCode playerOneRight;
     private KeyCode playerTwoLeft;
     private KeyCode playerTwoRight;
-    private bool multiplayer = false;
+    private bool online;
     private bool isMasterClient;
     private bool inputEnabled;
     public static int GetPlayerOneSkill()
@@ -32,10 +32,21 @@ public class SkillSelectionController : MonoBehaviour
     {
         playerTwoSkill = skill;
     }
-    public void EnableMultiplayerMode(bool isMasterClient)
+    public void OnlineReset(bool isMasterClient)
     {
-        this.multiplayer = true;
+        playerOneSkill = 0;
+        playerTwoSkill = 0;
+        this.online = true;
         this.isMasterClient = isMasterClient;
+        EnableInput();
+        UpdateSkillCellPointers();
+    }
+    public void LocalReset()
+    {
+        playerOneSkill = 0;
+        playerTwoSkill = 0;
+        this.online = false;
+        EnableInput();
         UpdateSkillCellPointers();
     }
     public void EnableInput()
@@ -53,21 +64,18 @@ public class SkillSelectionController : MonoBehaviour
         playerTwoLeft = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P2Left", "LeftArrow"));
         playerTwoRight = (KeyCode) Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("P2Right", "RightArrow"));
 
-        inputEnabled = true;
+        inputEnabled = false;
     }
     private void Start()
     {
-        playerOneSkill = 0;
-        playerTwoSkill = 0;
         skillCells = skillList.GetSkillCells();
         skillCellsCount = skillCells.Count;
-        UpdateSkillCellPointers();
     }
     private void Update()
     {
         if (inputEnabled)
         {
-            if (multiplayer)
+            if (online)
             {
                 if (isMasterClient)
                 {
@@ -155,7 +163,7 @@ public class SkillSelectionController : MonoBehaviour
     }
     private void UpdateSkillCellPointers()
     {
-        if (multiplayer)
+        if (online)
         {
             if (isMasterClient)
             {
