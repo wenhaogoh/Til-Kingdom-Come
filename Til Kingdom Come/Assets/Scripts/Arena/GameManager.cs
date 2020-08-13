@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public PausePanelController pausePanel;
     public static Action<int> onPlayerDeath;
     private int map, wins, playerOneScore, playerTwoScore;
-    private static bool _multiplayerMode;
+    private static bool _onlineMode;
 
     private void Awake()
     {
@@ -87,15 +87,13 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public static bool IsMultiplayer()
+    public static bool IsOnline()
     {
-        return _multiplayerMode;
+        return _onlineMode;
     }
 
-    public static void SetMultiplayerMode(bool multiplayerBool)
+    public static void SetOnlineMode(bool onlineBool)
     {
-        _multiplayerMode = multiplayerBool;
+        _onlineMode = onlineBool;
     }
-    
-    
 }

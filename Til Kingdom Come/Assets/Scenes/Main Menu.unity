@@ -1138,7 +1138,7 @@ PrefabInstance:
     - target: {fileID: 2453767028843792696, guid: e8d59bbce0f5046a999f9b326724f3c6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Multiplayer Lobby
+      value: Online Lobby
       objectReference: {fileID: 0}
     - target: {fileID: 2453767028843792696, guid: e8d59bbce0f5046a999f9b326724f3c6,
         type: 3}

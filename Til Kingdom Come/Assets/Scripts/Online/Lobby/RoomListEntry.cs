@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Multiplayer.Lobby
+namespace Online.Lobby
 {
     public class RoomListEntry : MonoBehaviour
     {

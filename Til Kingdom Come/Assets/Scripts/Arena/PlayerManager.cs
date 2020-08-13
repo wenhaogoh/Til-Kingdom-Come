@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if (GameManager.IsMultiplayer())
+        if (GameManager.IsOnline())
         {
             if (PhotonNetwork.IsMasterClient)
             {

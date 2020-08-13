@@ -59,7 +59,7 @@ namespace Player_Scripts
         #endregion
         private void Awake()
         {
-            if (GameManager.IsMultiplayer())
+            if (GameManager.IsOnline())
             {
                 pv = GetComponent<PhotonView>();
             }
@@ -85,7 +85,7 @@ namespace Player_Scripts
 
         private void Update()
         {
-            if (GameManager.IsMultiplayer())
+            if (GameManager.IsOnline())
             {
                 if (!pv.IsMine) return;
             }
@@ -138,7 +138,7 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptAttack)
             {
-                if (GameManager.IsMultiplayer())
+                if (GameManager.IsOnline())
                 {
                     pv.RPC("RPCAttack", RpcTarget.All);
                 }
@@ -153,7 +153,7 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptBlock)
             {
-                if (GameManager.IsMultiplayer())
+                if (GameManager.IsOnline())
                 {
                     pv.RPC("RPCBlock", RpcTarget.All);
                 }
@@ -168,7 +168,7 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptRoll)
             {
-                if (GameManager.IsMultiplayer())
+                if (GameManager.IsOnline())
                 {
                     pv.RPC("RPCRoll", RpcTarget.All);
                 }
@@ -183,7 +183,7 @@ namespace Player_Scripts
         {
             if (playerInput.AttemptSkill)
             {
-                if (GameManager.IsMultiplayer())
+                if (GameManager.IsOnline())
                 {
                     pv.RPC("RPCSkill", RpcTarget.All);
                 }
@@ -221,7 +221,18 @@ namespace Player_Scripts
         {
             skills[3].Cast(this);
         }
-        
+
+        [PunRPC]
+        private void RPCDie()
+        {
+            Die();
+        }
+
+        [PunRPC]
+        private void RPCHurt()
+        {
+            StartCoroutine(Hurt());
+        }
         #endregion
         
         private void RotateLeft()
@@ -267,15 +278,28 @@ namespace Player_Scripts
         public void TakeDamage(int damage)
         {
             if (invulnerable) return;
-            
             DecreaseHealth(damage);
             if (IsDead())
             {
-                Die();
+                if (GameManager.IsOnline())
+                {
+                    RPCDie();
+                }
+                else
+                {
+                    Die();
+                }
             }
             else
             {
-                StartCoroutine(Hurt());
+                if (GameManager.IsOnline())
+                {
+                    RPCHurt();
+                }
+                else
+                {
+                    StartCoroutine(Hurt());
+                }
             }
         }
 

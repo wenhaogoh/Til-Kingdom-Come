@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Multiplayer.Lobby
+namespace Online.Lobby
 {
     public class PlayerEntry : MonoBehaviour
     {

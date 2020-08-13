@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Multiplayer
+namespace Online
 {
     /// <summary>
     /// Player name input field. Let the user input his name, will appear above the player in the game.

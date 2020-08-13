@@ -15,7 +15,7 @@ namespace UI.Arena
 
         private void Start()
         {
-            if (!GameManager.IsMultiplayer())
+            if (!GameManager.IsOnline())
             {
                 AssignIcons(player);
             }

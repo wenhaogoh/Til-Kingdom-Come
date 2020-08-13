@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-using Multiplayer.Lobby;
+using Online.Lobby;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Multiplayer
+namespace Online
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
@@ -265,7 +265,7 @@ namespace Multiplayer
         [PunRPC]
         private void startGameRPC()
         {
-            GameManager.SetMultiplayerMode(true);
+            GameManager.SetOnlineMode(true);
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel("Arena");
