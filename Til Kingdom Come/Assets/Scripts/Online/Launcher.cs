@@ -191,8 +191,7 @@ namespace Online
                 int maxPlayers = info.MaxPlayers;
                 var wins = info.CustomProperties["wins"];
                 var map = info.CustomProperties["map"];
-                GameObject roomListEntry = Instantiate(roomListEntryPrefab);
-                roomListEntry.transform.SetParent(roomListContent.transform);
+                GameObject roomListEntry = Instantiate(roomListEntryPrefab, roomListContent.transform);
                 roomListEntry.GetComponent<RoomListEntry>().Initialize(info.Name, info.PlayerCount, (int) info.MaxPlayers, (int) info.CustomProperties["wins"], (int) info.CustomProperties["map"]);
             }
         }
