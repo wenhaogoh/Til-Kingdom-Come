@@ -2857,7 +2857,7 @@ PrefabInstance:
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
@@ -2892,12 +2892,12 @@ PrefabInstance:
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PanelsController, Assembly-CSharp
+      value: SkillSelectionController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
@@ -2908,11 +2908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1562880254}
+      objectReference: {fileID: 1040664529}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetPanelActive
+      value: LocalReset
       objectReference: {fileID: 0}
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
@@ -2922,6 +2922,41 @@ PrefabInstance:
     - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PanelsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1562880254}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetPanelActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550132602575633703, guid: 4f9f34b9f562f574292c0224ec00d0c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
       value: Skill Selection Panel
       objectReference: {fileID: 0}
     - target: {fileID: 6244896643153136359, guid: 4f9f34b9f562f574292c0224ec00d0c4,

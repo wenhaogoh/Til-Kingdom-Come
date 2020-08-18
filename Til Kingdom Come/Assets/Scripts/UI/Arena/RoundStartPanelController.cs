@@ -8,6 +8,7 @@ public class RoundStartPanelController : MonoBehaviour
 {
     private RectTransform rectTransform;
     public TextMeshProUGUI roundNumber;
+    public PausePanelController pausePanelController;
     private float speed = 800f;
     private float freezeDuration = 1f;
     private Vector3 hiddenPosition;
@@ -41,6 +42,7 @@ public class RoundStartPanelController : MonoBehaviour
             {
                 raise = false;
                 PlayerInput.onEnableInput.Invoke();
+                pausePanelController.EnablePause();
             }
         }
     }
@@ -48,6 +50,7 @@ public class RoundStartPanelController : MonoBehaviour
     {
         this.roundNumber.text = roundNumber.ToString();
         lower = true;
+        pausePanelController.DisablePause();
     }
     private IEnumerator Freeze(float duration)
     {

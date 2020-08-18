@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player_Scripts;
+using UI.Arena;
 
 public class PausePanelController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PausePanelController : MonoBehaviour
     private void Awake()
     {
         gameIsPaused = false;
-        canPause = true;
+        canPause = false;
     }
     private void Update()
     {
@@ -19,11 +20,25 @@ public class PausePanelController : MonoBehaviour
         {
             if(gameIsPaused)
             {
-                Resume();
+                if (GameManager.IsOnline())
+                {
+
+                }
+                else
+                {
+                    Resume();
+                }
             }
             else
             {
-                Pause();
+                if (GameManager.IsOnline())
+                {
+                    
+                }
+                else
+                {
+                    Pause();
+                }
             }
         }
     }
@@ -36,7 +51,7 @@ public class PausePanelController : MonoBehaviour
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
-    private void Resume()
+    public void Resume()
     {
         PlayerInput.onEnableInput.Invoke();
         AudioController.instance.PlayCurrentMusic();
@@ -48,5 +63,9 @@ public class PausePanelController : MonoBehaviour
     public void DisablePause()
     {
         canPause = false;
+    }
+    public void EnablePause()
+    {
+        canPause = true;
     }
 }
