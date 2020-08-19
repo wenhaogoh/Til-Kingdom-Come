@@ -96,4 +96,10 @@ public class GameManager : MonoBehaviour
     {
         _onlineMode = onlineBool;
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        onPlayerDeath -= PlayerDeathEvent;
+    }
 }

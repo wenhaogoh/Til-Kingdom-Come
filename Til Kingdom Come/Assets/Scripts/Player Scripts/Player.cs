@@ -10,6 +10,7 @@ namespace Player_Scripts
     public class Player : Entity, IDamageable
     {
         public static int totalPlayers = 0;
+        public static int maxPlayers = 2;
         private PhotonView pv;
         private int playerNo;
         public enum CombatState { NonCombat, Blocking, Rolling, Hurt, Combat, Dead}
@@ -65,6 +66,9 @@ namespace Player_Scripts
             }
             
             // Set player number
+            if (totalPlayers >= maxPlayers) {
+                totalPlayers = 0;
+            }
             totalPlayers++;
             playerNo = totalPlayers;
 
