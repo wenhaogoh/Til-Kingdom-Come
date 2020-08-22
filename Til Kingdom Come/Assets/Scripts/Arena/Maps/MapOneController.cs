@@ -24,7 +24,7 @@ public class MapOneController : MonoBehaviour
             {
                 float boulderSpawnXAxis = Random.Range(-15, 15);
                 var boulderSpawnPosition = new Vector3(boulderSpawnXAxis, boulderSpawnYAxis, 0);
-                if (SceneManager.GetActiveScene().name == "Arena")
+                if (!GameManager.IsOnline())
                     Instantiate(boulder, boulderSpawnPosition, Quaternion.identity);
                 else
                 {
