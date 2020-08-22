@@ -250,7 +250,7 @@ namespace Player_Scripts
         }
 
         [PunRPC]
-        private void RPCTakeDieCheck()
+        private void RPCDieCheck()
         {
             if (combatState != CombatState.Dead)
             {

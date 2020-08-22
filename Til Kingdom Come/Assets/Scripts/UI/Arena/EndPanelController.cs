@@ -87,6 +87,6 @@ public class EndPanelController : MonoBehaviour
     [PunRPC]
     private void RPCRestart()
     {
-        SceneManager.LoadScene("Arena");
+        PhotonNetwork.LoadLevel("Arena");
     }
 }
