@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &28499051
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1562,7 +1562,7 @@ GameObject:
   - component: {fileID: 246793196}
   m_Layer: 0
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9291,6 +9291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835522085}
   - component: {fileID: 835522086}
+  - component: {fileID: 835522087}
   m_Layer: 0
   m_Name: Map 1
   m_TagString: Untagged
@@ -9328,6 +9329,21 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &835522087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835522084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788c6e75dfd594db09b12233d1f9ff28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boulder: {fileID: 189145007189191597, guid: 1bfcc85bec486427381aed8f59f30d1d, type: 3}
+  playerOnePanel: {fileID: 1959196756}
+  playerTwoPanel: {fileID: 2038110785}
 --- !u!1 &840207915
 GameObject:
   m_ObjectHideFlags: 0
@@ -15931,6 +15947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899255886}
   - component: {fileID: 1899255887}
+  - component: {fileID: 1899255888}
   m_Layer: 0
   m_Name: Map 0
   m_TagString: Untagged
@@ -15968,6 +15985,18 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &1899255888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899255885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f6d67fe856c4c21a8edcec784844e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1913979895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53551,6 +53580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652615922671446450, guid: baaafa363530b48458685da8f27af61b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8652615922887242565, guid: baaafa363530b48458685da8f27af61b,
         type: 3}

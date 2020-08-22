@@ -53,6 +53,18 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
+  - name: Map 0
+    clip: {fileID: 8300000, guid: 8ec9016ed68f34466af39f1b56863584, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Map 1
+    clip: {fileID: 8300000, guid: 7b08bed0f287f486c9325f3b40804618, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 1
   - name: Selection Theme
     clip: {fileID: 8300000, guid: 63eef4e3d117f406385021ab2d59573e, type: 3}
     source: {fileID: 0}
@@ -154,6 +166,12 @@ MonoBehaviour:
     loop: 0
   - name: Victory
     clip: {fileID: 8300000, guid: d940f1c06b4714dc2ae774660cea2a70, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Ground Smash 3
+    clip: {fileID: 8300000, guid: 0093d9af728884f369f54fe333c597e5, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1

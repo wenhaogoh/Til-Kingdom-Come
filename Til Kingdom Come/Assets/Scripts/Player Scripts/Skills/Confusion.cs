@@ -10,7 +10,6 @@ namespace Player_Scripts.Skills
         private float confustionParticleYOffset = 3f;
         
         private float confusionDuration = 4f;
-        private float pushDistance = 6f;
         private float rayCastYOffset = 2f;
         private LayerMask playerLayerMask;
         

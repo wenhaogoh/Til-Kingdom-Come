@@ -136,35 +136,46 @@ namespace Player_Scripts.Skills
             var tempOffset = player.IsFacingLeft()
                 ? new Vector2(-xOffset, yOffset)
                 : new Vector2(xOffset, yOffset);
-            // Debug.DrawRay(playerPosition + tempOffset, direction * attackDistance, Color.red, 3);
+            Debug.DrawRay(playerPosition + tempOffset, direction * attackDistance, Color.red, 3);
             RaycastHit2D[] rayCasts = Physics2D.RaycastAll(playerPosition + tempOffset, direction, attackDistance, playerLayerMask);
             foreach (var hit2D in rayCasts)
             {
                 Player target = hit2D.collider.GetComponent<Player>();
-                if (target == player) continue;
-                if (target.combatState == Player.CombatState.Blocking &&
-                    Player.IsOpponentFacingPlayer(player, target))
+                BoulderController boulder = hit2D.collider.GetComponentInParent<BoulderController>();
+                if (target != null)
                 {
-                    // successful block
-                    target.SuccessfulBlock();
-                    target.KnockBack(opponentKnockBackDistance);
-                    player.KnockBack(selfKnockBackDistance);
+                    if (target == player) continue;
+                    if (target.combatState == Player.CombatState.Blocking &&
+                        Player.IsOpponentFacingPlayer(player, target))
+                    {
+                        // successful block
+                        target.SuccessfulBlock();
+                        target.KnockBack(opponentKnockBackDistance);
+                        player.KnockBack(selfKnockBackDistance);
+                    }
+                    else if (target.combatState == Player.CombatState.Rolling)
+                    {
+                        // successful roll, play sound effect
+                    }
+                    else if (target.combatState == Player.CombatState.Dead)
+                    {
+                        
+                    }
+                    else
+                    {
+                        // add sfx
+                        AudioController.instance.PlaySoundEffect("Slash");
+                        target.TakeDamage(damage);
+                    }
                 }
-                else if (target.combatState == Player.CombatState.Rolling)
+
+                if (boulder != null)
                 {
-                    // successful roll, play sound effect
+                    Debug.Log("Hit");
+                    var boulderProjectile = boulder.GetComponentInChildren<BoulderProjectileController>();
+                    boulderProjectile.Impact();
+
                 }
-                else if (target.combatState == Player.CombatState.Dead)
-                {
-                    
-                }
-                else
-                {
-                    // add sfx
-                    AudioController.instance.PlaySoundEffect("Slash");
-                    target.TakeDamage(damage);
-                }
-                
             }
             combo.UpdateCombo();
         }
