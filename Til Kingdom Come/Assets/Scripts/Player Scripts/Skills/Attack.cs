@@ -12,9 +12,13 @@ namespace Player_Scripts.Skills
         private float chargeTime = 4f;
         private int damage = 20;
         private int finalComboDamage = 40;
+        
         private float reactionDelay = 0.3f;
         private float attackDistance = 4.5f;
         private float moveDistance = 12f;
+        private int selfKnockBackDistance = 5;
+        private int opponentKnockBackDistance = 5;
+        
         private Combo combo = new Combo();
         public Sprite[] sprites = new Sprite[3];
 
@@ -141,6 +145,8 @@ namespace Player_Scripts.Skills
                 {
                     // successful block
                     target.SuccessfulBlock();
+                    target.KnockBack(opponentKnockBackDistance);
+                    player.KnockBack(selfKnockBackDistance);
                 }
                 else if (target.combatState == Player.CombatState.Rolling)
                 {

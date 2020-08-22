@@ -427,6 +427,18 @@ namespace Player_Scripts
             transform.rotation = spawnRotation;
         }
 
+        public void KnockBack(int knockBackDistance)
+        {
+            if (IsFacingLeft())
+            {
+                rb.velocity = new Vector2(knockBackDistance, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-knockBackDistance, 0);
+            }
+        }
+
         public void enableInvulnerability()
         {
             invulnerable = true;
