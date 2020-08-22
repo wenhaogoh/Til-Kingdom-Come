@@ -7,6 +7,7 @@ namespace Player_Scripts.Skills
     public class Lunge : Skill
     {
         private float lungeDistance = 150f;
+        private int opponentKnockBackDistance = 5;
         private float channelDuration = 0.7f;
         private float lungeRange = 10f;
         private int damage = 50;
@@ -133,6 +134,8 @@ namespace Player_Scripts.Skills
                     Player.IsOpponentFacingPlayer(player, target))
                 {
                     // successful block
+                    target.SuccessfulBlock();
+                    target.KnockBack(opponentKnockBackDistance);
                 }
                 else if (target.combatState == Player.CombatState.Rolling)
                 {

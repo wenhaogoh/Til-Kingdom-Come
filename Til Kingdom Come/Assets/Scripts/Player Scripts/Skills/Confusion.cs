@@ -46,7 +46,6 @@ namespace Player_Scripts.Skills
         private IEnumerator Confuse(Player player)
         {
             player.playerInput.InvertMovementKeys();
-            
             var confusionParticlesGameObject = Instantiate(confusionParticles, player.transform.position + new Vector3(0, confustionParticleYOffset),
                 player.transform.rotation);
             confusionParticlesGameObject.transform.parent = player.transform;
