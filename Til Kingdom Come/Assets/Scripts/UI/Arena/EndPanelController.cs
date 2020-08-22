@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndPanelController : MonoBehaviour
 {
@@ -9,9 +11,12 @@ public class EndPanelController : MonoBehaviour
     private float speed = 800f;
     private Vector3 targetPosition = Vector3.zero;
     private bool lower;
+    private PhotonView pv;
+    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        pv = GetComponent<PhotonView>();
         lower = false;
     }
     private void Update()
@@ -38,5 +43,50 @@ public class EndPanelController : MonoBehaviour
             playerTwoVictory.SetActive(true);
         }
         lower = true;
+    }
+
+    public void OnHomeButtonClicked()
+    {
+        if (GameManager.IsOnline())
+        {
+            pv.RPC("RPCHome", RpcTarget.All);
+        }
+        else
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+    }
+
+    [PunRPC]
+    private void RPCHome()
+    {
+        PhotonNetwork.LeaveRoom();
+        StartCoroutine(SceneChange());
+    }
+    
+    private IEnumerator SceneChange()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("Online Lobby");
+        yield return null;
+    }
+
+    public void OnRestartButtonClicked()
+    {
+        if (GameManager.IsOnline())
+        {
+            // Reloads scene on all clients since PhotonNetwork.LoadLevel cannot be used
+            pv.RPC("RPCRestart", RpcTarget.All);
+        }
+        else
+        {
+            SceneManager.LoadScene("Arena");
+        }
+    }
+
+    [PunRPC]
+    private void RPCRestart()
+    {
+        SceneManager.LoadScene("Arena");
     }
 }
