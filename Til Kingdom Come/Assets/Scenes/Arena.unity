@@ -13304,6 +13304,41 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: SceneLoaderController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 760691342}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: Main Theme
+      objectReference: {fileID: 0}
     - target: {fileID: 8490213917955093691, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
       propertyPath: m_Sprite
@@ -53584,7 +53619,7 @@ PrefabInstance:
     - target: {fileID: 8652615922671446450, guid: baaafa363530b48458685da8f27af61b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652615922887242565, guid: baaafa363530b48458685da8f27af61b,
         type: 3}
@@ -53643,7 +53678,7 @@ PrefabInstance:
     - target: {fileID: 6377764630001515550, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6377764630001515550, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
@@ -54281,7 +54316,7 @@ PrefabInstance:
     - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
@@ -54341,7 +54376,7 @@ PrefabInstance:
     - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: LoadScene
+      value: PlayMusic
       objectReference: {fileID: 0}
     - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
@@ -54351,6 +54386,41 @@ PrefabInstance:
     - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: Main Theme
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: SceneLoaderController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 760691342}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6954785471477200173, guid: 040f394950ec14555abb69267c9cf8fa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
       value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8490213917955093691, guid: 040f394950ec14555abb69267c9cf8fa,

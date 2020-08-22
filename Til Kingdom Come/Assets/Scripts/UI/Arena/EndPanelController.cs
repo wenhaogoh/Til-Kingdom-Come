@@ -54,6 +54,7 @@ public class EndPanelController : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Main Menu");
+            AudioController.instance.PlayMusic("Main Theme");
         }
     }
 
@@ -62,6 +63,7 @@ public class EndPanelController : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
         StartCoroutine(SceneChange());
+        AudioController.instance.PlayMusic("Selection Theme");
     }
     
     private IEnumerator SceneChange()
