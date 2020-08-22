@@ -17,6 +17,7 @@ namespace Online
         public SceneLoaderController sceneLoaderController;
         [Header("Login Panel")]
         public TMP_InputField nicknameInput;
+        public ConnectingController connectingController;
 
         [Header("Lobby Panel")]
         public GameObject roomListContent;
@@ -68,6 +69,7 @@ namespace Online
         }
         public override void OnConnectedToMaster()
         {
+            connectingController.SetInactive();
             panelsController.SetPanelActive("Selection Panel");
         }
         #endregion
