@@ -52,6 +52,7 @@ namespace Player_Scripts.Skills
             charge.DecreaseCharge();
             combo.SetDecay();
             player.playerInput.DisableInput();
+            AudioController.instance.PlaySoundEffect("Attack");
             switch (combo.CurrentCombo)
             {
                 case (Combo.ComboNumber.One):
@@ -109,10 +110,11 @@ namespace Player_Scripts.Skills
             // Final combo particles
             var finalComboParticleOffset = player.IsFacingLeft()
                 ? new Vector3(-finalComboParticleXOffset, 0)
-                : new Vector3(finalComboParticleXOffset, 0); 
+                : new Vector3(finalComboParticleXOffset, 0);
             Instantiate(finalComboParticle, player.transform.position + finalComboParticleOffset,
                 Quaternion.identity);
             cinemachineImpulseSource.GenerateImpulse();
+            AudioController.instance.PlaySoundEffect("Third Attack");
             player.combatState = Player.CombatState.NonCombat;
             player.playerInput.EnableInput();
         }
@@ -148,11 +150,12 @@ namespace Player_Scripts.Skills
                 }
                 else if (target.combatState == Player.CombatState.Dead)
                 {
-                    // ??? play sound effect   
+                    
                 }
                 else
                 {
                     // add sfx
+                    AudioController.instance.PlaySoundEffect("Slash");
                     target.TakeDamage(damage);
                 }
                 

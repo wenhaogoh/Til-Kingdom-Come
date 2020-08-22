@@ -19,6 +19,7 @@ namespace Player_Scripts.Skills
         {
             if (!CanCast()) return;
 
+            AudioController.instance.PlaySoundEffect("Heal");
             StartCoroutine(HealAnimDelay(player));
             StartCoroutine(HealOverTime(player));
 

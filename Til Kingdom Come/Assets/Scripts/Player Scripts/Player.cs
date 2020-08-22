@@ -331,6 +331,7 @@ namespace Player_Scripts
 
         private void Die()
         {
+            AudioController.instance.PlaySoundEffect("Death");
             playerInput.DisableInput();
             enableInvulnerability();
             anim.SetBool("Death", true);
@@ -396,6 +397,7 @@ namespace Player_Scripts
 
         public void SuccessfulBlock()
         {
+            AudioController.instance.PlaySoundEffect("Swords Collide");
             Instantiate(sparks, transform.position + new Vector3(0, sparksYOffset), transform.rotation);
         }
 

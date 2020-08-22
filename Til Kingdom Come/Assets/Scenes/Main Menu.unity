@@ -13533,31 +13533,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5420776254312539541, guid: 702eba63700254350ae0e311590a8a2a,
-        type: 3}
-      propertyPath: soundEffects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420776254312539541, guid: 702eba63700254350ae0e311590a8a2a,
-        type: 3}
-      propertyPath: soundEffects.Array.data[1].name
-      value: Error
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420776254312539541, guid: 702eba63700254350ae0e311590a8a2a,
-        type: 3}
-      propertyPath: soundEffects.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: dd1e2f7f4e21046cba2b500294b7c8a0, type: 3}
-    - target: {fileID: 5420776254312539541, guid: 702eba63700254350ae0e311590a8a2a,
-        type: 3}
-      propertyPath: soundEffects.Array.data[1].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420776254312539541, guid: 702eba63700254350ae0e311590a8a2a,
-        type: 3}
-      propertyPath: soundEffects.Array.data[1].pitch
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 702eba63700254350ae0e311590a8a2a, type: 3}
 --- !u!1001 &8412736022102563111

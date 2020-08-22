@@ -28,6 +28,7 @@ public class EndPanelController : MonoBehaviour
     }
     public void Trigger(int playerNo)
     {
+        AudioController.instance.PlaySoundEffect("Victory");
         if (playerNo == 1)
         {
             playerOneVictory.SetActive(true);

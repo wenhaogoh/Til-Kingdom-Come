@@ -37,6 +37,7 @@ namespace Player_Scripts.Skills
                 nextAvailableTime = Time.time + chargeTime;
             }
             charge.DecreaseCharge();
+
             StartCoroutine(ThrowKnivesAnimDelay(player));
 
 
@@ -58,6 +59,7 @@ namespace Player_Scripts.Skills
             var rotation = player.IsFacingLeft()
                 ? Quaternion.Euler(0, 180, 0)
                 : Quaternion.identity;
+            AudioController.instance.PlaySoundEffect("Throw Knife");
             var knife = Instantiate(this.knife, player.transform.position + tempOffset, rotation);
             knife.GetComponent<Rigidbody2D>().velocity = speed * direction;
             yield return new WaitForSeconds(AnimationTimes.instance.ThrowKnivesAnim - knifeDelay);

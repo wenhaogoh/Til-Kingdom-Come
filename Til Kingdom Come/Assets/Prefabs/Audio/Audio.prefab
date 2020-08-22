@@ -68,3 +68,99 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: Error
+    clip: {fileID: 8300000, guid: dd1e2f7f4e21046cba2b500294b7c8a0, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Attack
+    clip: {fileID: 8300000, guid: 1bc776adef3414443851f11503a687f8, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Confusion
+    clip: {fileID: 8300000, guid: 2036de45ad31345ada5892da0b43d364, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Roll
+    clip: {fileID: 8300000, guid: 39d93906a2db94588acd03d272705d6b, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: dcdb2e288ce0d49a9aa661fcb4897855, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Fireball
+    clip: {fileID: 8300000, guid: 88a8e14fa6170467fb3ad45730eb0d3c, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Ground Smash 1
+    clip: {fileID: 8300000, guid: 90ac35a935d2e466dac2510dd96e10b9, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Ground Smash 2
+    clip: {fileID: 8300000, guid: 14ea4b14d7bee4e91929faf9c596f047, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Heal
+    clip: {fileID: 8300000, guid: 7bbf7dd0d80714ff498589b4c862e4fc, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Lunge
+    clip: {fileID: 8300000, guid: b44f34a308ce64ef6909bf18736023cf, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Round Start
+    clip: {fileID: 8300000, guid: 8d930bd3aa88144988f0e98b70c50abb, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Swords Collide
+    clip: {fileID: 8300000, guid: 3e98063720ba545b5b0b4549be03c139, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Third Attack
+    clip: {fileID: 8300000, guid: 9e8ef8ce7220046a68631eec0e76e31b, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Throw Knife
+    clip: {fileID: 8300000, guid: 4b76533959bc74d298cb1b715a9002cd, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Victory
+    clip: {fileID: 8300000, guid: d940f1c06b4714dc2ae774660cea2a70, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Slash
+    clip: {fileID: 8300000, guid: aa7120168dd3c451abb83345f81df7bd, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0

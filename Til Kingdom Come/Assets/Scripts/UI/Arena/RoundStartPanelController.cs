@@ -19,6 +19,7 @@ public class RoundStartPanelController : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         hiddenPosition = (Vector3) rectTransform.anchoredPosition;
+
         lower = false;
         raise = false;
     }
@@ -48,6 +49,7 @@ public class RoundStartPanelController : MonoBehaviour
     }
     public void Trigger(int roundNumber)
     {
+        AudioController.instance.PlaySoundEffect("Round Start");
         this.roundNumber.text = roundNumber.ToString();
         lower = true;
         pausePanelController.DisablePause();

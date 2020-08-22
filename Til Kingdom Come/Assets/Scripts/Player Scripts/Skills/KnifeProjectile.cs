@@ -28,8 +28,8 @@ namespace Player_Scripts.Skills
                     return;
                 // Player will not be damaged while blocking (projectile is destroyed)
                 case Player.CombatState.Blocking:
+                    damagedPlayer.SuccessfulBlock();
                     DestroyProjectile();
-                    Instantiate(sparks, transform.position, Quaternion.identity);
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);

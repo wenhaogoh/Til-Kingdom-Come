@@ -32,6 +32,8 @@ namespace Player_Scripts.Skills
         public override void Cast(Player player)
         {
             if (!CanCast()) return;
+            
+            AudioController.instance.PlaySoundEffect("Lunge");
             StartCoroutine(LungeAnimDelay(player));
             StartCoroutine(SpawnAfterImage(player));
 

@@ -14,6 +14,7 @@ namespace Player_Scripts.Skills
         // Start is called before the first frame update
         private void Awake()
         {
+            AudioController.instance.PlaySoundEffect("Fireball");
             nextTime = Time.time;
             endTime = Time.time + fireDuration;
             boxCollider2D = GetComponent<BoxCollider2D>();

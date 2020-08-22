@@ -17,6 +17,8 @@ namespace Player_Scripts.Skills
         public override void Cast(Player player)
         {
             if (!CanCast()) return;
+            
+            AudioController.instance.PlaySoundEffect("Roll");
             StartCoroutine(RollAnimDelay(player));
         }
 
