@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Player_Scripts;
+using UI.Arena;
 
 public class GameManager : MonoBehaviour
 {

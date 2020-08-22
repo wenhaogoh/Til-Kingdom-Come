@@ -58,5 +58,10 @@ namespace UI.Arena
                 cooldowns[i] = player.skills[i];
             }
         }
+
+        public void SetActive()
+        {
+            transform.localScale = Vector3.one;
+        }
     }
 }
