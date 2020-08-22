@@ -58,6 +58,10 @@ namespace Player_Scripts
         private float hurtDistance = 8f;
         private float hurtStunDuration = 0.2f;
         #endregion
+
+        #region ONLINE CHECKS
+        private bool tookDamage = false;
+        #endregion
         private void Awake()
         {
             if (GameManager.IsOnline())
@@ -227,15 +231,31 @@ namespace Player_Scripts
         }
 
         [PunRPC]
-        private void RPCDie()
-        {
-            Die();
-        }
-
-        [PunRPC]
         private void RPCHurt()
         {
             StartCoroutine(Hurt());
+        }
+
+        [PunRPC]
+        private void RPCTakeDamageCheck(int damage)
+        {
+            if (tookDamage)
+            {
+                tookDamage = false;
+            }
+            else
+            {
+                TakeDamage(damage);
+            }
+        }
+
+        [PunRPC]
+        private void RPCTakeDieCheck()
+        {
+            if (combatState != CombatState.Dead)
+            {
+                Die();
+            }
         }
         #endregion
         
@@ -282,17 +302,19 @@ namespace Player_Scripts
         public void TakeDamage(int damage)
         {
             if (invulnerable) return;
+            tookDamage = true;
+            if (GameManager.IsOnline())
+            {
+                pv.RPC("RPCTakeDamageCheck", RpcTarget.All, damage);
+            }
             DecreaseHealth(damage);
             if (IsDead())
             {
                 if (GameManager.IsOnline())
                 {
-                    RPCDie();
+                    pv.RPC("RPCDieCheck", RpcTarget.All);
                 }
-                else
-                {
-                    Die();
-                }
+                Die();
             }
             else
             {
@@ -310,6 +332,7 @@ namespace Player_Scripts
         private void Die()
         {
             playerInput.DisableInput();
+            enableInvulnerability();
             anim.SetBool("Death", true);
             Instantiate(bloodSplatter, transform.position + new Vector3(0, bloodSplatterYOffset), transform.rotation);
             GameManager.onPlayerDeath.Invoke(playerNo);
