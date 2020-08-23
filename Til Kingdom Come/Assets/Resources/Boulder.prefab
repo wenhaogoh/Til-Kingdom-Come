@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1132410622056954860}
   - component: {fileID: 8856233943248264699}
   - component: {fileID: -6294291804268440119}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -79,7 +80,7 @@ GameObject:
   - component: {fileID: 6228033863006319464}
   - component: {fileID: 6618761274579542254}
   - component: {fileID: 4350606742502465946}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Boulder Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +178,7 @@ GameObject:
   - component: {fileID: 2149999888527192486}
   - component: {fileID: 2501373769902236152}
   - component: {fileID: 8668930971414269431}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

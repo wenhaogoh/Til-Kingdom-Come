@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using Arena;
+using Audio;
 using Photon.Pun;
 using Player_Scripts.Interfaces;
 using Player_Scripts.Skills;
@@ -332,7 +334,7 @@ namespace Player_Scripts
         private void Die()
         {
             AudioController.instance.PlaySoundEffect("Death");
-            playerInput.DisableInput();
+            playerInput.DisableAndLockInput();
             enableInvulnerability();
             anim.SetBool("Death", true);
             Instantiate(bloodSplatter, transform.position + new Vector3(0, bloodSplatterYOffset), transform.rotation);

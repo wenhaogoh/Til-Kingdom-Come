@@ -1,40 +1,42 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class ConnectingController : MonoBehaviour
+namespace UI.Online_Lobby
 {
-    public TextMeshProUGUI text;
-    private float interval = 0.5f;
-    // Start is called before the first frame update
-    void Start()
+    public class ConnectingController : MonoBehaviour
     {
-        StartCoroutine(Animation(interval));
-    }
-
-    private IEnumerator Animation(float interval)
-    {
-        while (true)
+        public TextMeshProUGUI text;
+        private float interval = 0.5f;
+        // Start is called before the first frame update
+        void Start()
         {
-            text.text = "Connecting";
-            yield return new WaitForSeconds(interval);
-            text.text = "Connecting.";
-            yield return new WaitForSeconds(interval);
-            text.text = "Connecting..";
-            yield return new WaitForSeconds(interval);
-            text.text = "Connecting...";
-            yield return new WaitForSeconds(interval);
+            StartCoroutine(Animation(interval));
         }
-    }
 
-    public void SetActive()
-    {
-        transform.localScale = Vector3.one;
-    }
+        private IEnumerator Animation(float interval)
+        {
+            while (true)
+            {
+                text.text = "Connecting";
+                yield return new WaitForSeconds(interval);
+                text.text = "Connecting.";
+                yield return new WaitForSeconds(interval);
+                text.text = "Connecting..";
+                yield return new WaitForSeconds(interval);
+                text.text = "Connecting...";
+                yield return new WaitForSeconds(interval);
+            }
+        }
 
-    public void SetInactive()
-    {
-        transform.localScale = Vector3.zero;
+        public void SetActive()
+        {
+            transform.localScale = Vector3.one;
+        }
+
+        public void SetInactive()
+        {
+            transform.localScale = Vector3.zero;
+        }
     }
 }

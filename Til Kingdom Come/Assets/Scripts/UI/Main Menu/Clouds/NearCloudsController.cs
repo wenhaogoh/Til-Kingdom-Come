@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 
-public class NearCloudsController : MonoBehaviour
+namespace UI.Main_Menu.Clouds
 {
-    private RectTransform rectTransform;
-    private float speed = -40f;
-    private float sizeOfMap = 1920;
-    private void Start()
+    public class NearCloudsController : MonoBehaviour
     {
-        rectTransform = GetComponent<RectTransform>();
-    }
-    private void Update()
-    {
-        if (rectTransform.anchoredPosition.x <= -sizeOfMap) {
-            rectTransform.anchoredPosition = new Vector2(sizeOfMap, rectTransform.anchoredPosition.y);
+        private RectTransform rectTransform;
+        private float speed = -40f;
+        private float sizeOfMap = 1920;
+        private void Start()
+        {
+            rectTransform = GetComponent<RectTransform>();
         }
+        private void Update()
+        {
+            if (rectTransform.anchoredPosition.x <= -sizeOfMap) {
+                rectTransform.anchoredPosition = new Vector2(sizeOfMap, rectTransform.anchoredPosition.y);
+            }
         
-        rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
+            rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
+        }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Audio;
 using Player_Scripts;
+using UnityEngine;
 
-public class BoulderProjectileController : MonoBehaviour
+namespace Arena.Boulder
 {
+    public class BoulderProjectileController : MonoBehaviour
+    {
         public static int soundEffectClipNumber = 1;
         private int totalSoundEffectClips = 3;
         private float damage = 10; // ranges from 10 to 30 based on size
@@ -23,10 +24,13 @@ public class BoulderProjectileController : MonoBehaviour
             // destroys projectile if it touches a wall
             if (collision.CompareTag("Wall")) Impact();
             
-            if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             // projectile collides a player
             Player damagedPlayer = collision.GetComponent<Player>();
-            if (damagedPlayer == null) return;
+            if (damagedPlayer == null)
+            {
+                Debug.Log("no player fouind");
+                return;
+            }
             switch (damagedPlayer.combatState)
             {
                 // Player cant be hit while rolling
@@ -56,4 +60,5 @@ public class BoulderProjectileController : MonoBehaviour
             Instantiate(collideEffect, transform.position + offSet, Quaternion.identity);
             Destroy(parent);
         }
+    }
 }

@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using Arena.Boulder;
+using Audio;
 using Cinemachine;
+using Player_Scripts.Interfaces;
 using UnityEngine;
 
 namespace Player_Scripts.Skills
@@ -31,7 +34,7 @@ namespace Player_Scripts.Skills
             name = "Attack";
             cooldown = chargeTime;
             charge = new Charge(maxCharge, chargeTime);
-            playerLayerMask = 1 << 8;
+            playerLayerMask = 1 << 8 | 1 << 11;
             cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         }
 

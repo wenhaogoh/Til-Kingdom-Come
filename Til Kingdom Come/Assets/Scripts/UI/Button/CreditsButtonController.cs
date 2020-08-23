@@ -1,38 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CreditsButtonController : MonoBehaviour
+namespace UI.Button
 {
-    private RectTransform rectTransform;
-    private Vector3 startPosition;
-    private Vector3 targetPosition;
-    private float speed = 200f;
-    private bool pointerEnter;
-    private void Start()
+    public class CreditsButtonController : MonoBehaviour
     {
-        rectTransform = GetComponent<RectTransform>();
-        startPosition = rectTransform.anchoredPosition;
-        targetPosition = startPosition + new Vector3(70 ,0 , 0);
-    }
-    private void Update()
-    {
-        float step = speed * Time.deltaTime;
-        if (pointerEnter)
+        private RectTransform rectTransform;
+        private Vector3 startPosition;
+        private Vector3 targetPosition;
+        private float speed = 200f;
+        private bool pointerEnter;
+        private void Start()
         {
-            rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, targetPosition, step);
+            rectTransform = GetComponent<RectTransform>();
+            startPosition = rectTransform.anchoredPosition;
+            targetPosition = startPosition + new Vector3(70 ,0 , 0);
         }
-        else
+        private void Update()
         {
-            rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, startPosition, step);
+            float step = speed * Time.deltaTime;
+            if (pointerEnter)
+            {
+                rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, targetPosition, step);
+            }
+            else
+            {
+                rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, startPosition, step);
+            }
         }
-    }
-    public void PopIn()
-    {
-        pointerEnter = true;
-    }
-    public void PopOut()
-    {
-        pointerEnter = false;
+        public void PopIn()
+        {
+            pointerEnter = true;
+        }
+        public void PopOut()
+        {
+            pointerEnter = false;
+        }
     }
 }

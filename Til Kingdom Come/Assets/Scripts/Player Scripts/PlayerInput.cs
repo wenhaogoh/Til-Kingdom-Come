@@ -93,7 +93,7 @@ namespace Player_Scripts
             inputIsEnabled = false;
         }
 
-        private void DisableAndLockInput()
+        public void DisableAndLockInput()
         {
             attemptLeft = false;
             attemptRight = false;

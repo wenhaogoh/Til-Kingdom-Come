@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 
-public class ButtonSoundController : MonoBehaviour
+namespace UI.Button
 {
-    public void PlaySoundEffect()
+    public class ButtonSoundController : MonoBehaviour
     {
-        AudioController.instance.PlaySoundEffect("Button");
+        public void PlaySoundEffect()
+        {
+            AudioController.instance.PlaySoundEffect("Button");
+        }
     }
 }

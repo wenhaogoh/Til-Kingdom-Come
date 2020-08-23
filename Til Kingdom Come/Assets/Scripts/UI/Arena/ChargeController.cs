@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using Player_Scripts.Interfaces;
+using TMPro;
 using UnityEngine;
 
-namespace Player_Scripts
+namespace UI.Arena
 {
     public class ChargeController : MonoBehaviour
     {

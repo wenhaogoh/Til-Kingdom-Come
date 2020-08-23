@@ -1,4 +1,4 @@
-﻿namespace Player_Scripts
+﻿namespace Player_Scripts.Interfaces
 {
     public interface ICharge
     {

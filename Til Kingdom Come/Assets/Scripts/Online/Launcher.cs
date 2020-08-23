@@ -1,9 +1,15 @@
 ﻿using System.Collections.Generic;
+using Arena;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Online.Lobby;
 using Photon.Pun;
 using Photon.Realtime;
+using Scene_Loader;
 using TMPro;
+using UI;
+using UI.Online_Lobby;
+using UI.Selection.Map_Selection_Panel;
+using UI.Selection.Skill_Selection_Panel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

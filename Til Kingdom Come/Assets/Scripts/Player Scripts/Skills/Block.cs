@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Player_Scripts.Interfaces;
 using UnityEngine;
 
 namespace Player_Scripts.Skills

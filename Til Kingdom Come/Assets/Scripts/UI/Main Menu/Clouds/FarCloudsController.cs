@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FarCloudsController : MonoBehaviour
+namespace UI.Main_Menu.Clouds
 {
-    private RectTransform rectTransform;
-    private float speed = -25f;
-    private float sizeOfMap = 1920;
-    private void Start()
+    public class FarCloudsController : MonoBehaviour
     {
-        rectTransform = GetComponent<RectTransform>();
-    }
-    private void Update()
-    {
-        if (rectTransform.anchoredPosition.x <= -sizeOfMap) {
-            rectTransform.anchoredPosition = new Vector2(sizeOfMap, rectTransform.anchoredPosition.y);
+        private RectTransform rectTransform;
+        private float speed = -25f;
+        private float sizeOfMap = 1920;
+        private void Start()
+        {
+            rectTransform = GetComponent<RectTransform>();
         }
-        rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
+        private void Update()
+        {
+            if (rectTransform.anchoredPosition.x <= -sizeOfMap) {
+                rectTransform.anchoredPosition = new Vector2(sizeOfMap, rectTransform.anchoredPosition.y);
+            }
+            rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
+        }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System;
-using Player_Scripts;
-using Player_Scripts.Interfaces;
+﻿using Player_Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarController : MonoBehaviour
+namespace UI.Arena
 {
-    public IHealthBar entity;
-    public Image healthBarFill;
-
-    private void Update()
+    public class HealthBarController : MonoBehaviour
     {
-        healthBarFill.fillAmount = entity.GetHealthRatio();
+        public IHealthBar entity;
+        public Image healthBarFill;
+
+        private void Update()
+        {
+            healthBarFill.fillAmount = entity.GetHealthRatio();
+        }
     }
 }

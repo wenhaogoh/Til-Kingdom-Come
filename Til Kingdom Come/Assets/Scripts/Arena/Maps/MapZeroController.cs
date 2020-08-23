@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Audio;
 using UnityEngine;
 
-public class MapZeroController : MonoBehaviour
+namespace Arena.Maps
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MapZeroController : MonoBehaviour
     {
-        AudioController.instance.PlayMusic("Map 0");
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            AudioController.instance.PlayMusic("Map 0");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

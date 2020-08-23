@@ -1,37 +1,40 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-public class SetWinsController : MonoBehaviour
+namespace UI.Selection.Map_Selection_Panel
 {
-    public TextMeshProUGUI text;
-    private static int wins = 1;
-    private int maxWins = 10;
-    public static int GetWins()
+    public class SetWinsController : MonoBehaviour
     {
-        return wins;
-    }
-    public static void SetWins(int i)
-    {
-        wins = i;
-    }
-    private void Start()
-    {
-        text.text = wins.ToString();
-    }
-    public void increaseWins()
-    {
-        if (wins < maxWins)
+        public TextMeshProUGUI text;
+        private static int wins = 1;
+        private int maxWins = 10;
+        public static int GetWins()
         {
-            wins++;
+            return wins;
+        }
+        public static void SetWins(int i)
+        {
+            wins = i;
+        }
+        private void Start()
+        {
             text.text = wins.ToString();
         }
-    }
-    public void decreaseWins()
-    {
-        if (wins > 1)
+        public void increaseWins()
         {
-            wins--;
-            text.text = wins.ToString();
+            if (wins < maxWins)
+            {
+                wins++;
+                text.text = wins.ToString();
+            }
+        }
+        public void decreaseWins()
+        {
+            if (wins > 1)
+            {
+                wins--;
+                text.text = wins.ToString();
+            }
         }
     }
 }

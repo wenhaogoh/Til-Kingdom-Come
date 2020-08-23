@@ -2,39 +2,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetMapController : MonoBehaviour
+namespace UI.Selection.Map_Selection_Panel
 {
-    public Image image;
-    public List<Sprite> sprites = new List<Sprite>();
-    private static int selectedMap = 0;
-    public static int GetMap()
+    public class SetMapController : MonoBehaviour
     {
-        return selectedMap;
-    }
-    public static void SetMap(int map)
-    {
-        selectedMap = map;
-    }
-    private void Start()
-    {
-        image.sprite = sprites[selectedMap];
-    }
-    public void NextMap()
-    {
-        selectedMap++;
-        if (selectedMap >= sprites.Count)
+        public Image image;
+        public List<Sprite> sprites = new List<Sprite>();
+        private static int selectedMap = 0;
+        public static int GetMap()
         {
-            selectedMap = 0;
+            return selectedMap;
         }
-        image.sprite = sprites[selectedMap];
-    }
-    public void PreviousMap()
-    {
-        selectedMap--;
-        if (selectedMap < 0)
+        public static void SetMap(int map)
         {
-            selectedMap = sprites.Count - 1;
+            selectedMap = map;
         }
-        image.sprite = sprites[selectedMap];
+        private void Start()
+        {
+            image.sprite = sprites[selectedMap];
+        }
+        public void NextMap()
+        {
+            selectedMap++;
+            if (selectedMap >= sprites.Count)
+            {
+                selectedMap = 0;
+            }
+            image.sprite = sprites[selectedMap];
+        }
+        public void PreviousMap()
+        {
+            selectedMap--;
+            if (selectedMap < 0)
+            {
+                selectedMap = sprites.Count - 1;
+            }
+            image.sprite = sprites[selectedMap];
+        }
     }
 }

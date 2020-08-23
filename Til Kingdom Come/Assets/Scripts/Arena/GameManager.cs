@@ -1,106 +1,110 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using System;
 using Player_Scripts;
+using TMPro;
 using UI.Arena;
+using UI.Selection.Map_Selection_Panel;
+using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Arena
 {
-    public PlayerManager playerManager;
-    public List<GameObject> maps;
-    public TextMeshProUGUI playerOneScoreText, playerTwoScoreText, targetScore;
-    public RoundStartPanelController roundStartPanel;
-    public EndPanelController endPanel;
-    public PausePanelController pausePanel;
-    public static Action<int> onPlayerDeath;
-    private int map, wins, playerOneScore, playerTwoScore;
-    private static bool _onlineMode;
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        map = SetMapController.GetMap();
-        maps[map].SetActive(true);
+        public PlayerManager playerManager;
+        public List<GameObject> maps;
+        public TextMeshProUGUI playerOneScoreText, playerTwoScoreText, targetScore;
+        public RoundStartPanelController roundStartPanel;
+        public EndPanelController endPanel;
+        public PausePanelController pausePanel;
+        public static Action<int> onPlayerDeath;
+        private int map, wins, playerOneScore, playerTwoScore;
+        private static bool _onlineMode;
 
-        wins = SetWinsController.GetWins();
-        targetScore.text = wins.ToString();
-        playerOneScore = 0;
-        playerTwoScore = 0;
-
-        playerOneScoreText.text = "0";
-        playerTwoScoreText.text = "0";
-
-        onPlayerDeath += PlayerDeathEvent;
-    }
-    private void Start()
-    {
-        int roundNumber = playerOneScore + playerTwoScore + 1;
-        roundStartPanel.Trigger(roundNumber);
-    }
-    private void PlayerDeathEvent(int playerNo)
-    {
-        // update scores
-        if (playerNo == 1)
+        private void Awake()
         {
-            // player one dies
-            playerTwoScore++;
-            playerTwoScoreText.text = playerTwoScore.ToString();
+            map = SetMapController.GetMap();
+            maps[map].SetActive(true);
+
+            wins = SetWinsController.GetWins();
+            targetScore.text = wins.ToString();
+            playerOneScore = 0;
+            playerTwoScore = 0;
+
+            playerOneScoreText.text = "0";
+            playerTwoScoreText.text = "0";
+
+            onPlayerDeath += PlayerDeathEvent;
         }
-        else if (playerNo == 2)
+        private void Start()
         {
-            // player two dies
-            playerOneScore++;
-            playerOneScoreText.text = playerOneScore.ToString();
+            int roundNumber = playerOneScore + playerTwoScore + 1;
+            roundStartPanel.Trigger(roundNumber);
         }
+        private void PlayerDeathEvent(int playerNo)
+        {
+            // update scores
+            if (playerNo == 1)
+            {
+                // player one dies
+                playerTwoScore++;
+                playerTwoScoreText.text = playerTwoScore.ToString();
+            }
+            else if (playerNo == 2)
+            {
+                // player two dies
+                playerOneScore++;
+                playerOneScoreText.text = playerOneScore.ToString();
+            }
         
-        // trigger subsequent event
-        if (playerOneScore >= wins)
-        {
-            StartCoroutine(PlayerWinEvent(1));
+            // trigger subsequent event
+            if (playerOneScore >= wins)
+            {
+                StartCoroutine(PlayerWinEvent(1));
+            }
+            else if (playerTwoScore >= wins)
+            {
+                StartCoroutine(PlayerWinEvent(2));
+            }
+            else
+            {
+                StartCoroutine(NextRoundEvent());
+            }
         }
-        else if (playerTwoScore >= wins)
+
+        private IEnumerator NextRoundEvent()
         {
-            StartCoroutine(PlayerWinEvent(2));
+            playerManager.EnableInvulnerabilityForAllPlayers();
+            yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
+            playerManager.ResetAllPlayers();
+            int roundNumber = playerOneScore + playerTwoScore + 1;
+            roundStartPanel.Trigger(roundNumber);
+            yield return null;
         }
-        else
+
+        private IEnumerator PlayerWinEvent(int playerNo)
         {
-            StartCoroutine(NextRoundEvent());
+            playerManager.EnableInvulnerabilityForAllPlayers();
+            yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
+            endPanel.Trigger(playerNo);
+            pausePanel.DisablePause();
+            yield return null;
         }
-    }
 
-    private IEnumerator NextRoundEvent()
-    {
-        playerManager.EnableInvulnerabilityForAllPlayers();
-        yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
-        playerManager.ResetAllPlayers();
-        int roundNumber = playerOneScore + playerTwoScore + 1;
-        roundStartPanel.Trigger(roundNumber);
-        yield return null;
-    }
+        public static bool IsOnline()
+        {
+            return _onlineMode;
+        }
 
-    private IEnumerator PlayerWinEvent(int playerNo)
-    {
-        playerManager.EnableInvulnerabilityForAllPlayers();
-        yield return new WaitForSeconds(AnimationTimes.instance.DeathAnim + 0.5f);
-        endPanel.Trigger(playerNo);
-        pausePanel.DisablePause();
-        yield return null;
-    }
+        public static void SetOnlineMode(bool onlineBool)
+        {
+            _onlineMode = onlineBool;
+        }
 
-    public static bool IsOnline()
-    {
-        return _onlineMode;
-    }
-
-    public static void SetOnlineMode(bool onlineBool)
-    {
-        _onlineMode = onlineBool;
-    }
-
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-        onPlayerDeath -= PlayerDeathEvent;
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+            onPlayerDeath -= PlayerDeathEvent;
+        }
     }
 }
