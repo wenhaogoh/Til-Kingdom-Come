@@ -254,7 +254,7 @@ namespace Player_Scripts
         [PunRPC]
         private void RPCDieCheck()
         {
-            if (combatState != CombatState.Dead)
+            if (GetHealth() > 0)
             {
                 Die();
             }
@@ -312,11 +312,12 @@ namespace Player_Scripts
             DecreaseHealth(damage);
             if (IsDead())
             {
+                Die();
                 if (GameManager.IsOnline())
                 {
                     pv.RPC("RPCDieCheck", RpcTarget.All);
                 }
-                Die();
+                
             }
             else
             {

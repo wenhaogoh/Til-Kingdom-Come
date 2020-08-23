@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 
 namespace Player_Scripts.Skills
 {
@@ -13,10 +14,9 @@ namespace Player_Scripts.Skills
             if (collision.CompareTag("Wall")) DestroyProjectile();
             if (collision.CompareTag("Projectile"))
             {
-                Instantiate(sparks, transform.position, Quaternion.identity);
-                DestroyProjectile();
+                Impact();
             }
-            
+
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             // projectile collides a player
             Player damagedPlayer = collision.GetComponent<Player>();
@@ -36,6 +36,13 @@ namespace Player_Scripts.Skills
                     DestroyProjectile();
                     return;
             }
+        }
+
+        private void Impact()
+        {
+            Instantiate(sparks, transform.position, Quaternion.identity);
+            AudioController.instance.PlaySoundEffect("Swords Collide");
+            DestroyProjectile();
         }
         
         private void DestroyProjectile()
